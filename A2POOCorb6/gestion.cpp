@@ -41,24 +41,6 @@ namespace NS_Svc
 		this->ds = this->cad->getRows(this->commande->SELECT(), dataTableName);
 		return this->ds;
 	}
-
-	DataSet^ gestion::listeProduit(String^ dataTableName)
-	{
-		this->ds->Clear();
-		this->ds = this->cad->getRows(this->produit->SELECT(), dataTableName);
-		return this->ds;
-	}
-
-	DataSet^ gestion::listeNature(String^ dataTableName)
-	{
-		this->ds->Clear();
-		this->ds = this->cad->getRows(this->nature->SELECT(), dataTableName);
-		return this->ds;
-	}
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 	int gestion::ajouterClient(String^ NOM_CLIENT, String^ PRENOM_CLIENT, String^ DATE_NAISSANCE_CLIENT, String^ DATE_PREMIERE_COMMANDE_CLIENT)
 	{
 		int id_personne;

@@ -19,6 +19,7 @@ namespace NS_Composants {
 	public:
 		CLIENT();
 		String^ SELECT(void);
+		String^ SELECTCLIENTADRESSE(void);
 		String^ INSERT(void);
 		String^ UPDATE(void);
 		String^ DELETE(void);

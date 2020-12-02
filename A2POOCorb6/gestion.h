@@ -23,7 +23,7 @@ namespace NS_Svc {
 		NS_Composants::PRODUITS^ produit;
 		NS_Composants::NATURE^ nature;
 		DataSet^ ds;
-
+		
 
 	public:
 		gestion();
@@ -31,8 +31,6 @@ namespace NS_Svc {
 		DataSet^ listePersonnel(String^);
 		DataSet^ listeAdresse(String^);
 		DataSet^ listeCommande(String^); 
-		DataSet^ listeProduit(String^);
-		DataSet^ listeNature(String^);
 		
 		int ajouterClient(String^, String^, String^, String^);
 		void modifier(int, String^, String^, String^, String^);

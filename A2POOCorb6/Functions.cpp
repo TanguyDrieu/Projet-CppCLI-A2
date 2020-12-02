@@ -6,7 +6,7 @@ namespace NS_Composants
 	this->rq_sql = "RIEN";
 	connStrinfBuilder = gcnew SqlConnectionStringBuilder();
 	connStrinfBuilder->DataSource = "DESKTOP-PQR7KBN";
-	connStrinfBuilder->InitialCatalog = "Projet_POO";
+	connStrinfBuilder->InitialCatalog = "PROJET_CASTORAMA";
 	connStrinfBuilder->IntegratedSecurity = true;
 
 
