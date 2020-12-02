@@ -14,7 +14,7 @@ namespace NS_Svc {
 	{
 	private:
 		NS_Composants::CL_CAD^ cad;
-		NS_Composants::CLIENT^ personne;
+		NS_Composants::CLIENT^ client;
 		NS_Composants::PERSONNEL^ personnel;
 		NS_Composants::ADRESSE^ adresse;
 		NS_Composants::COMMANDES^ commande;
@@ -23,14 +23,14 @@ namespace NS_Svc {
 
 	public:
 		gestion();
-		DataSet^ listePersonnes(String^);
+		DataSet^ listeClient(String^);
 		DataSet^ listePersonnel(String^);
 		DataSet^ listeAdresse(String^);
 		DataSet^ listeCommande(String^); 
 		
-		int ajouter(String^, String^, String^, String^);
-		void modifier(int, String^, String^, String^, String^);
-		void supprimer(int);
+		int ajouterClient(String^, String^, String^, String^);
+		void modifierClient(int, String^, String^, String^, String^);
+		void supprimerClient(int);
 
 
 		int ajouterPersonnel(String^, String^, String^, String^);

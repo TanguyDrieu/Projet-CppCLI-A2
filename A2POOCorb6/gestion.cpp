@@ -6,16 +6,17 @@ namespace NS_Svc
 	gestion::gestion(void)
 	{
 		this->cad = gcnew NS_Composants::CL_CAD();
-		this->personne = gcnew NS_Composants::CLIENT();
+		this->adresse = gcnew NS_Composants::ADRESSE();
+		this->client = gcnew NS_Composants::CLIENT();
 		this->personnel = gcnew NS_Composants::PERSONNEL();
 		this->commande = gcnew NS_Composants::COMMANDES();
 	
 		this->ds = gcnew Data::DataSet();
 	}
-	DataSet^ gestion::listePersonnes(String^ dataTableName)
+	DataSet^ gestion::listeClient(String^ dataTableName)
 	{
 		this->ds->Clear();
-		this->ds = this->cad->getRows(this->personne->SELECT(), dataTableName);
+		this->ds = this->cad->getRows(this->client->SELECT(), dataTableName);
 		return this->ds;
 	}
 	DataSet^ gestion::listePersonnel(String^ dataTableName)
@@ -36,29 +37,29 @@ namespace NS_Svc
 		this->ds = this->cad->getRows(this->commande->SELECT(), dataTableName);
 		return this->ds;
 	}
-	int gestion::ajouter(String^ NOM_CLIENT, String^ PRENOM_CLIENT, String^ DATE_NAISSANCE_CLIENT, String^ DATE_PREMIERE_COMMANDE_CLIENT)
+	int gestion::ajouterClient(String^ NOM_CLIENT, String^ PRENOM_CLIENT, String^ DATE_NAISSANCE_CLIENT, String^ DATE_PREMIERE_COMMANDE_CLIENT)
 	{
 		int id_personne;
-		this->personne->setNOM_CLIENT(NOM_CLIENT);
-		this->personne->setPRENOM_CLIENT(PRENOM_CLIENT);
-		this->personne->setDATE_NAISSANCE_CLIENT(DATE_NAISSANCE_CLIENT);
-		this->personne->setDATE_PREMIERE_COMMANDE_CLIENT(DATE_PREMIERE_COMMANDE_CLIENT);
-		id_personne = this->cad->actionRowsID(this->personne->INSERT());
+		this->client->setNOM_CLIENT(NOM_CLIENT);
+		this->client->setPRENOM_CLIENT(PRENOM_CLIENT);
+		this->client->setDATE_NAISSANCE_CLIENT(DATE_NAISSANCE_CLIENT);
+		this->client->setDATE_PREMIERE_COMMANDE_CLIENT(DATE_PREMIERE_COMMANDE_CLIENT);
+		id_personne = this->cad->actionRowsID(this->client->INSERT());
 		return id_personne;
 	}
-	void gestion::modifier(int ID_CLIENT, String^ NOM_CLIENT, String^ PRENOM_CLIENT, String^ DATE_NAISSANCE_CLIENT, String^ DATE_PREMIERE_COMMANDE_CLIENT)
+	void gestion::modifierClient(int ID_CLIENT, String^ NOM_CLIENT, String^ PRENOM_CLIENT, String^ DATE_NAISSANCE_CLIENT, String^ DATE_PREMIERE_COMMANDE_CLIENT)
 	{
-		this->personne->setID(ID_CLIENT);
-		this->personne->setNOM_CLIENT(NOM_CLIENT);
-		this->personne->setPRENOM_CLIENT(PRENOM_CLIENT);
-		this->personne->setDATE_NAISSANCE_CLIENT(DATE_NAISSANCE_CLIENT);
-		this->personne->setDATE_PREMIERE_COMMANDE_CLIENT(DATE_PREMIERE_COMMANDE_CLIENT);
-		this->cad->actionRows(this->personne->UPDATE());
+		this->client->setID(ID_CLIENT);
+		this->client->setNOM_CLIENT(NOM_CLIENT);
+		this->client->setPRENOM_CLIENT(PRENOM_CLIENT);
+		this->client->setDATE_NAISSANCE_CLIENT(DATE_NAISSANCE_CLIENT);
+		this->client->setDATE_PREMIERE_COMMANDE_CLIENT(DATE_PREMIERE_COMMANDE_CLIENT);
+		this->cad->actionRows(this->client->UPDATE());
 	}
-	void gestion::supprimer(int ID_CLIENT)
+	void gestion::supprimerClient(int ID_CLIENT)
 	{
-		this->personne->setID(ID_CLIENT);
-		this->cad->actionRows(this->personne->DELETE());
+		this->client->setID(ID_CLIENT);
+		this->cad->actionRows(this->client->DELETE());
 	}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -87,7 +88,7 @@ void gestion::modifierPersonnel(int ID_PERSONNEL, String^ NOM_PERSONNEL, String^
 }
 void gestion::supprimerPersonnel(int ID_PERSONNEL)
 {
-	this->personne->setID(ID_PERSONNEL);
+	this->personnel->setID_PERSONNEL(ID_PERSONNEL);
 	this->cad->actionRows(this->personnel->DELETE());
 }
 
