@@ -22,73 +22,106 @@ namespace NS_Composants
 	{
 		return "INSERT INTO COMMANDES " +
 			"(DATE_LIVRAISON_PREVUE, DATE_EMISSION_FACTURE, DATE_SOLDE_REGLEMENT, MONTANT_HT, MONTANT_TVA, MONTANT_TTC, DATE_EMISSION_FACTURE) " +
-			"VALUES('" + this->getDATE_LIVRAISON_() + "', '" + this->getPRENOM_PERSONNEL() + "', '" + this->getADRESSE_MAIL_PERSONNEL() + "', '" + this->getDATE_EMBAUCHE() + "');SELECT @@IDENTITY;";
+			"VALUES('" + this->getDATE_LIVRAISON_PREVUE() + "', '" + this->getDATE_EMISSION_FACTURE() + "', '" + this->getDATE_SOLDE_REGLEMENT() + "', '" + this->getMONTANT_HT() + "', '" + this->getMONTANT_TVA() + "', '" + this->getMONTANT_TTC() + "', '" + this->getDATE_EMISSION_FACTURE() + "');SELECT @@IDENTITY;";
 	}
-	String^ PERSONNEL::UPDATE(void)
+	String^ COMMANDES::UPDATE(void)
 	{
-		return "UPDATE PERSONNEL " +
-			"SET NOM_PERSONNEL = '" + this->getNOM_PERSONNEL() + "', PRENOM_PERSONNEL = '" + this->getPRENOM_PERSONNEL() + "', ADRESSE_MAIL_PERSONNEL'" + this->getADRESSE_MAIL_PERSONNEL() + "', DATE_EMBAUCHE '" + this->getDATE_EMBAUCHE() + "' " +
+		return "UPDATE COMMANDES " +
+			"SET DATE_LIVRAISON_PREVUE = '" + this->getDATE_LIVRAISON_PREVUE() + "', DATE_EMISSION_COMMANDE = '" + this->getDATE_EMISSION_COMMANDE() + "', DATE_SOLDE_REGLEMENT'" + this->getDATE_SOLDE_REGLEMENT() + "', MONTANT_HT '" + this->getMONTANT_HT() + "', MONTANT_TVA'" + this->getMONTANT_TVA() + "', MONTANT_TTC'" + this->getMONTANT_TTC() + "', DATE_EMISSION_FACTURE'" + this->getDATE_EMISSION_FACTURE() + "' " +
 
-			"WHERE(ID_PERSONNEL = " + this->getID_PERSONNEL() + ");";
+			"WHERE(REF_COMMANDE = " + this->getREF_COMMANDE() + ");";
 	}
-	String^ PERSONNEL::DELETE(void)
+	String^ COMMANDES::DELETE(void)
 	{
-		return "DELETE FROM PERSONNEL " +
-			"WHERE(ID_PERSONNEL = " + this->getID_PERSONNEL() + ");";
+		return "DELETE FROM COMMANDES " +
+			"WHERE(REF_COMMANDE = " + this->getREF_COMMANDE() + ");";
 	}
-	void PERSONNEL::setID_PERSONNEL(int ID_PERSONNEL)
+	void COMMANDES::setREF_COMMANDE(int REF_COMMANDE)
 	{
-		if (ID_PERSONNEL > 0)
+		if (REF_COMMANDE > 0)
 		{
-			this->ID_PERSONNEL = ID_PERSONNEL;
+			this->REF_COMMANDE = REF_COMMANDE;
 		}
 	}
-	void PERSONNEL::setPRENOM_PERSONNEL(String^ PRENOM_PERSONNEL)
+	void COMMANDES::setDATE_LIVRAISON_PREVUE(String^ DATE_LIVRAISON_PREVUE)
 	{
-		if (PRENOM_PERSONNEL != "")
+		if (DATE_LIVRAISON_PREVUE != "")
 		{
-			this->PRENOM_PERSONNEL = PRENOM_PERSONNEL;
+			this->DATE_LIVRAISON_PREVUE = DATE_LIVRAISON_PREVUE;
 		}
 	}
-	void PERSONNEL::setNOM_PERSONNEL(String^ NOM_PERSONNEL)
+	void COMMANDES::setDATE_EMISSION_COMMANDE(String^ DATE_EMISSION_COMMANDE)
 	{
-		if (NOM_PERSONNEL != "")
+		if (DATE_EMISSION_COMMANDE != "")
 		{
-			this->NOM_PERSONNEL = NOM_PERSONNEL;
+			this->DATE_EMISSION_COMMANDE = DATE_EMISSION_COMMANDE;
 		}
 	}
-	void PERSONNEL::setADRESSE_MAIL_PERSONNEL(String^ ADRESSE_MAIL_PERSONNEL)
+	void COMMANDES::setDATE_SOLDE_REGLEMENT(String^ DATE_SOLDE_REGLEMENT)
 	{
-		if (ADRESSE_MAIL_PERSONNEL != "")
+		if (DATE_SOLDE_REGLEMENT != "")
 		{
-			this->ADRESSE_MAIL_PERSONNEL = ADRESSE_MAIL_PERSONNEL;
+			this->DATE_SOLDE_REGLEMENT = DATE_SOLDE_REGLEMENT;
 		}
 	}
-	void PERSONNEL::setDATE_EMBAUCHE(String^ DATE_EMBAUCHE)
+	void COMMANDES::setMONTANT_HT(String^ MONTANT_HT)
 	{
-		if (DATE_EMBAUCHE != "")
+		if (MONTANT_HT != "")
 		{
-			this->DATE_EMBAUCHE = DATE_EMBAUCHE;
+			this->MONTANT_HT = MONTANT_HT;
 		}
 	}
-	int PERSONNEL::getID_PERSONNEL(void)
+	void COMMANDES::setMONTANT_TVA(String^ MONTANT_TVA)
 	{
-		return this->ID_PERSONNEL;
+		if (MONTANT_TVA != "")
+		{
+			this->MONTANT_TVA = MONTANT_TVA;
+		}
 	}
-	String^ PERSONNEL::getNOM_PERSONNEL(void)
+	void COMMANDES::setMONTANT_TTC(String^ MONTANT_TTC)
 	{
-		return this->NOM_PERSONNEL;
+		if (MONTANT_TTC != "")
+		{
+			this->MONTANT_TTC = MONTANT_TTC;
+		}
 	}
-	String^ PERSONNEL::getPRENOM_PERSONNEL(void)
+	void COMMANDES::setDATE_EMISSION_FACTURE(String^ DATE_EMISSION_FACTURE)
 	{
-		return this->PRENOM_PERSONNEL;
+		if (DATE_EMISSION_FACTURE != "")
+		{
+			this->DATE_EMISSION_FACTURE = DATE_EMISSION_FACTURE;
+		}
 	}
-	String^ PERSONNEL::getADRESSE_MAIL_PERSONNEL(void)
+	int COMMANDES::getREF_COMMANDE(void)
 	{
-		return this->ADRESSE_MAIL_PERSONNEL;
+		return this->REF_COMMANDE;
 	}
-	String^ PERSONNEL::getDATE_EMBAUCHE(void)
+	String^ COMMANDES::getDATE_LIVRAISON_PREVUE(void)
 	{
-		return this->DATE_EMBAUCHE;
+		return this->DATE_LIVRAISON_PREVUE;
+	}
+	String^ COMMANDES::getDATE_EMISSION_COMMANDE(void)
+	{
+		return this->DATE_EMISSION_COMMANDE;
+	}
+	String^ COMMANDES::getDATE_SOLDE_REGLEMENT(void)
+	{
+		return this->DATE_SOLDE_REGLEMENT;
+	}
+	String^ COMMANDES::getMONTANT_HT(void)
+	{
+		return this->MONTANT_HT;
+	}
+	String^ COMMANDES::getMONTANT_TVA(void)
+	{
+		return this->MONTANT_TVA;
+	}
+	String^ COMMANDES::getMONTANT_TTC(void)
+	{
+		return this->MONTANT_TTC;
+	}
+	String^ COMMANDES::getDATE_EMISSION_FACTURE(void)
+	{
+		return this->DATE_EMISSION_FACTURE;
 	}
 }

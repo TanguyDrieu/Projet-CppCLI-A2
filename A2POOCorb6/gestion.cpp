@@ -7,7 +7,8 @@ namespace NS_Svc
 	{
 		this->cad = gcnew NS_Composants::CL_CAD();
 		this->personne = gcnew NS_Composants::CLIENT();
-		this->personnel = gcnew NS_Composants::PERSONNEL;
+		this->personnel = gcnew NS_Composants::PERSONNEL();
+		this->commande = gcnew NS_Composants::COMMANDES();
 	
 		this->ds = gcnew Data::DataSet();
 	}
@@ -27,6 +28,12 @@ namespace NS_Svc
 	{
 		this->ds->Clear();
 		this->ds = this->cad->getRows(this->adresse->SELECT(), dataTableName);
+		return this->ds;
+	}
+	DataSet^ gestion::listeCommande(String^ dataTableName)
+	{
+		this->ds->Clear();
+		this->ds = this->cad->getRows(this->commande->SELECT(), dataTableName);
 		return this->ds;
 	}
 	int gestion::ajouter(String^ NOM_CLIENT, String^ PRENOM_CLIENT, String^ DATE_NAISSANCE_CLIENT, String^ DATE_PREMIERE_COMMANDE_CLIENT)
@@ -111,7 +118,36 @@ void gestion::supprimerPersonnel(int ID_PERSONNEL)
 	}
  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+	int gestion::ajouterCommande(String^ DATE_LIVRAISON_PREVUE, String^ DATE_EMISSION_COMMANDE, String^ DATE_SOLDE_REGLEMENT, String^ MONTANT_HT, String^ MONTANT_TVA, String^ MONTANT_TTC, String^ DATE_EMISSION_FACTURE)
+	{
+		int ref_commande;
+		this->commande->setDATE_LIVRAISON_PREVUE(DATE_LIVRAISON_PREVUE);
+		this->commande->setDATE_EMISSION_COMMANDE(DATE_EMISSION_COMMANDE);
+		this->commande->setDATE_SOLDE_REGLEMENT(DATE_SOLDE_REGLEMENT);
+		this->commande->setMONTANT_HT(MONTANT_HT);
+		this->commande->setMONTANT_TVA(MONTANT_TVA);
+		this->commande->setMONTANT_TTC(MONTANT_TTC);
+		this->commande->setDATE_EMISSION_FACTURE(DATE_EMISSION_FACTURE);
+		ref_commande = this->cad->actionRowsID(this->commande->INSERT());
+		return ref_commande;
+	}
+	void gestion::modifierCommande(int REF_COMMANDE, String^ DATE_LIVRAISON_PREVUE, String^ DATE_EMISSION_COMMANDE, String^ DATE_SOLDE_REGLEMENT, String^ MONTANT_HT, String^ MONTANT_TVA, String^ MONTANT_TTC, String^ DATE_EMISSION_FACTURE)
+	{
+		this->commande->setREF_COMMANDE(REF_COMMANDE);
+		this->commande->setDATE_LIVRAISON_PREVUE(DATE_LIVRAISON_PREVUE);
+		this->commande->setDATE_EMISSION_COMMANDE(DATE_EMISSION_COMMANDE);
+		this->commande->setDATE_SOLDE_REGLEMENT(DATE_SOLDE_REGLEMENT);
+		this->commande->setMONTANT_HT(MONTANT_HT);
+		this->commande->setMONTANT_TVA(MONTANT_TVA);
+		this->commande->setMONTANT_TTC(MONTANT_TTC);
+		this->commande->setDATE_EMISSION_FACTURE(DATE_EMISSION_FACTURE);
+		this->cad->actionRows(this->commande->UPDATE());
+	}
+	void gestion::supprimerCommande(int REF_COMMANDE)
+	{
+		this->commande->setREF_COMMANDE(REF_COMMANDE);
+		this->cad->actionRows(this->commande->DELETE());
+	}
 
 
 

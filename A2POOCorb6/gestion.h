@@ -2,6 +2,8 @@
 #include"CLIENT.h"
 #include"Functions.h"
 #include"ADRESSE.h"
+#include"PERSONNEL.h"
+#include"COMMANDES.h"
 using namespace System::Data;
 using namespace System::Data::SqlClient;
 using namespace System::Xml;
@@ -15,6 +17,7 @@ namespace NS_Svc {
 		NS_Composants::CLIENT^ personne;
 		NS_Composants::PERSONNEL^ personnel;
 		NS_Composants::ADRESSE^ adresse;
+		NS_Composants::COMMANDES^ commande;
 		DataSet^ ds;
 
 
@@ -23,6 +26,7 @@ namespace NS_Svc {
 		DataSet^ listePersonnes(String^);
 		DataSet^ listePersonnel(String^);
 		DataSet^ listeAdresse(String^);
+		DataSet^ listeCommande(String^); 
 		
 		int ajouter(String^, String^, String^, String^);
 		void modifier(int, String^, String^, String^, String^);
@@ -37,6 +41,10 @@ namespace NS_Svc {
 		int ajouterAdresse(String^, String^, String^);
 		void modifierAdresse(int, String^, String^, String^);
 		void supprimerAdresse(int);
+
+		int ajouterCommande(String^, String^, String^, String^, String^, String^, String^);
+		void modifierCommande(int, String^, String^, String^, String^, String^, String^, String^);
+		void supprimerCommande(int);
 
 
 
