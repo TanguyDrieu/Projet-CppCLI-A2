@@ -1,6 +1,9 @@
 #include "gestion.h"
 #include"PERSONNEL.h"
 #include"ADRESSE.h"
+#include"PRODUITS.h"
+#include "NATURE.h"
+#include"MODE_REGLEMENT.h"
 namespace NS_Svc
 {
 	gestion::gestion(void)
@@ -9,6 +12,7 @@ namespace NS_Svc
 		this->personne = gcnew NS_Composants::CLIENT();
 		this->personnel = gcnew NS_Composants::PERSONNEL();
 		this->commande = gcnew NS_Composants::COMMANDES();
+		this->nature = gcnew NS_Composants::MODE_REGLEMENT();
 	
 		this->ds = gcnew Data::DataSet();
 	}
@@ -36,7 +40,25 @@ namespace NS_Svc
 		this->ds = this->cad->getRows(this->commande->SELECT(), dataTableName);
 		return this->ds;
 	}
-	int gestion::ajouter(String^ NOM_CLIENT, String^ PRENOM_CLIENT, String^ DATE_NAISSANCE_CLIENT, String^ DATE_PREMIERE_COMMANDE_CLIENT)
+
+	DataSet^ gestion::listeProduit(String^ dataTableName)
+	{
+		this->ds->Clear();
+		this->ds = this->cad->getRows(this->produit->SELECT(), dataTableName);
+		return this->ds;
+	}
+
+	DataSet^ gestion::listeNature(String^ dataTableName)
+	{
+		this->ds->Clear();
+		this->ds = this->cad->getRows(this->nature->SELECT(), dataTableName);
+		return this->ds;
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+	int gestion::ajouterClient(String^ NOM_CLIENT, String^ PRENOM_CLIENT, String^ DATE_NAISSANCE_CLIENT, String^ DATE_PREMIERE_COMMANDE_CLIENT)
 	{
 		int id_personne;
 		this->personne->setNOM_CLIENT(NOM_CLIENT);
@@ -148,6 +170,56 @@ void gestion::supprimerPersonnel(int ID_PERSONNEL)
 		this->commande->setREF_COMMANDE(REF_COMMANDE);
 		this->cad->actionRows(this->commande->DELETE());
 	}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	int gestion::ajouterProduit(String^ PRIX_HT, String^ DESIGNATION, String^ QUANTITE_STOCK, String^ SEUIL_REAPPROVISIONNEMENT, String^ TAUX_TVA)
+	{
+		int id_produit;
+		this->produit->setPRIX_HT(PRIX_HT);
+		this->produit->setDESIGNATION(DESIGNATION);
+		this->produit->setQUANTITE_STOCK(QUANTITE_STOCK);
+		this->produit->setSEUIL_REAPPROVISIONNEMENT(SEUIL_REAPPROVISIONNEMENT);
+		this->produit->setTAUX_TVA(TAUX_TVA);
+		id_produit = this->cad->actionRowsID(this->produit->INSERT());
+		return id_produit;
+	}
+	void gestion::modifierProduit(int REF_PRODUIT, String^ PRIX_HT, String^ DESIGNATION, String^ QUANTITE_STOCK, String^ SEUIL_REAPPROVISIONNEMENT, String^ TAUX_TVA)
+	{
+		this->produit->setREF_PRODUIT(REF_PRODUIT);
+		this->produit->setPRIX_HT(PRIX_HT);
+		this->produit->setDESIGNATION(DESIGNATION);
+		this->produit->setQUANTITE_STOCK(QUANTITE_STOCK);
+		this->produit->setSEUIL_REAPPROVISIONNEMENT(SEUIL_REAPPROVISIONNEMENT);
+		this->produit->setTAUX_TVA(TAUX_TVA);
+		this->cad->actionRows(this->produit->UPDATE());
+	}
+	void gestion::supprimerAdresse(int REF_PRODUIT)
+	{
+		this->produit->setREF_PRODUIT(REF_PRODUIT);
+		this->cad->actionRows(this->produit->DELETE());
+	}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	int gestion::ajouterNature(String^ INTITULE_NATURE)
+	{
+		int id_nature;
+		this->nature->setINTITULE_NATURE(INTITULE_NATURE);
+		id_nature = this->cad->actionRowsID(this->nature->INSERT());
+		return id_nature;
+	}
+	void gestion::modifierNature(int ID_NATURE, String^ INTITULE_NATURE)
+	{
+		this->nature->setID_NATURE(ID_NATURE);
+		this->nature->setINTITULE_NATURE(INTITULE_NATURE);
+		this->cad->actionRows(this->nature->UPDATE());
+	}
+	void gestion::supprimer(int ID_NATURE)
+	{
+		this->nature->setID_NATURE(ID_NATURE);
+		this->cad->actionRows(this->nature->DELETE());
+	}
+
 
 
 

@@ -128,7 +128,10 @@
     <ClCompile Include="FRM_Principal.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="gestion.cpp" />
+    <ClCompile Include="MODE_REGLEMENT.cpp" />
+    <ClCompile Include="NATURE.cpp" />
     <ClCompile Include="PERSONNEL.cpp" />
+    <ClCompile Include="PRODUITS.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ADRESSE.h" />
@@ -139,7 +142,10 @@
     </ClInclude>
     <ClInclude Include="Functions.h" />
     <ClInclude Include="gestion.h" />
+    <ClInclude Include="MODE_REGLEMENT.h" />
+    <ClInclude Include="NATURE.h" />
     <ClInclude Include="PERSONNEL.h" />
+    <ClInclude Include="PRODUITS.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FRM_Principal.resx">

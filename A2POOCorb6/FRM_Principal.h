@@ -417,7 +417,7 @@ namespace A2POOCorb6 {
 		if (this->mode == "nouv")
 		{
 			int Id;
-			Id = this->processusPersonnes->ajouter(this->txt_NOM_CLIENT->Text, this->txt_PRENOM_CLIENT->Text, this->txt_DATE_NAISSANCE_CLIENT->Text, this->txt_DATE_PREMIERE_COMMANDE_CLIENT->Text);
+			Id = this->processusPersonnes->ajouterClient(this->txt_NOM_CLIENT->Text, this->txt_PRENOM_CLIENT->Text, this->txt_DATE_NAISSANCE_CLIENT->Text, this->txt_DATE_PREMIERE_COMMANDE_CLIENT->Text);
 			this->txt_message->Text = "L'ID généré est le : " + Id + ". ";
 		}
 		else if (this->mode == "maj")
