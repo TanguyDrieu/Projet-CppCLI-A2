@@ -125,18 +125,24 @@
     <ClCompile Include="ADRESSE.cpp" />
     <ClCompile Include="CLIENT.cpp" />
     <ClCompile Include="COMMANDES.cpp" />
+    <ClCompile Include="CONTENIR.cpp" />
+    <ClCompile Include="COULEUR.cpp" />
     <ClCompile Include="FRM_Principal.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="gestion.cpp" />
     <ClCompile Include="MODE_REGLEMENT.cpp" />
     <ClCompile Include="NATURE.cpp" />
+    <ClCompile Include="PAIEMENT.cpp" />
     <ClCompile Include="PERSONNEL.cpp" />
     <ClCompile Include="PRODUITS.cpp" />
+    <ClCompile Include="TARIF.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ADRESSE.h" />
     <ClInclude Include="CLIENT.h" />
     <ClInclude Include="COMMANDES.h" />
+    <ClInclude Include="CONTENIR.h" />
+    <ClInclude Include="COULEUR.h" />
     <ClInclude Include="FRM_Principal.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -144,8 +150,10 @@
     <ClInclude Include="gestion.h" />
     <ClInclude Include="MODE_REGLEMENT.h" />
     <ClInclude Include="NATURE.h" />
+    <ClInclude Include="PAIEMENT.h" />
     <ClInclude Include="PERSONNEL.h" />
     <ClInclude Include="PRODUITS.h" />
+    <ClInclude Include="TARIF.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FRM_Principal.resx">
