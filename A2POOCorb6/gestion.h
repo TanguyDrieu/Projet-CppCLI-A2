@@ -19,14 +19,15 @@ namespace NS_Svc {
 		NS_Composants::ADRESSE^ adresse;
 		NS_Composants::COMMANDES^ commande;
 		DataSet^ ds;
-
+		
 
 	public:
 		gestion();
 		DataSet^ listeClient(String^);
 		DataSet^ listePersonnel(String^);
 		DataSet^ listeAdresse(String^);
-		DataSet^ listeCommande(String^); 
+		DataSet^ listeCommande(String^);
+		DataSet^ listeClientAdresse(String^);
 		
 		int ajouterClient(String^, String^, String^, String^);
 		void modifierClient(int, String^, String^, String^, String^);
