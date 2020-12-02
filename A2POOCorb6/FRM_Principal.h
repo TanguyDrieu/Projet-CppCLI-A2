@@ -57,6 +57,9 @@ namespace A2POOCorb6 {
 
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::TextBox^ txt_DATE_PREMIERE_COMMANDE_CLIENT;
+	private: System::Windows::Forms::ComboBox^ comboBox1;
+	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Label^ label3;
 
 
 
@@ -86,6 +89,9 @@ namespace A2POOCorb6 {
 			this->txt_DATE_NAISSANCE_CLIENT = (gcnew System::Windows::Forms::TextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->txt_DATE_PREMIERE_COMMANDE_CLIENT = (gcnew System::Windows::Forms::TextBox());
+			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// lbl_Id
@@ -269,11 +275,45 @@ namespace A2POOCorb6 {
 			this->txt_DATE_PREMIERE_COMMANDE_CLIENT->Size = System::Drawing::Size(89, 20);
 			this->txt_DATE_PREMIERE_COMMANDE_CLIENT->TabIndex = 19;
 			// 
+			// comboBox1
+			// 
+			this->comboBox1->FormattingEnabled = true;
+			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(8) {
+				L"Adresse", L"Client", L"Commandes", L"Contenir",
+					L"Paiement", L"Personnel", L"Produits", L"Tarif"
+			});
+			this->comboBox1->Location = System::Drawing::Point(125, 109);
+			this->comboBox1->Name = L"comboBox1";
+			this->comboBox1->Size = System::Drawing::Size(89, 21);
+			this->comboBox1->TabIndex = 20;
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(238, 169);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(186, 24);
+			this->button1->TabIndex = 21;
+			this->button1->Text = L"Changer table";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &FRM_Principal::button1_Click);
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(125, 94);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(39, 13);
+			this->label3->TabIndex = 22;
+			this->label3->Text = L"Tables";
+			// 
 			// FRM_Principal
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(439, 261);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->comboBox1);
 			this->Controls->Add(this->txt_DATE_PREMIERE_COMMANDE_CLIENT);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->txt_DATE_NAISSANCE_CLIENT);
@@ -395,6 +435,10 @@ namespace A2POOCorb6 {
 	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	if(comboBox1->SelectedIndex != -1)
+		MessageBox::Show("J'ai éclaté ta grand mère contre la table " + comboBox1->SelectedItem);
 }
 };
 }
