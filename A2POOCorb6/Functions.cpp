@@ -5,7 +5,7 @@ namespace NS_Composants
 	{
 	this->rq_sql = "RIEN";
 	connStrinfBuilder = gcnew SqlConnectionStringBuilder();
-	connStrinfBuilder->DataSource = "DESKTOP-PQR7KBN";
+	connStrinfBuilder->DataSource = "VICTORIEN";
 	connStrinfBuilder->InitialCatalog = "PROJET_CASTORAMA";
 	connStrinfBuilder->IntegratedSecurity = true;
 
