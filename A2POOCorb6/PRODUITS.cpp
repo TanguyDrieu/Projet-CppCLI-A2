@@ -5,7 +5,7 @@ namespace NS_Composants
 	PRODUITS::PRODUITS(void)
 	{
 
-		this->REF_PRODUIT = -1;
+		this->REF_PRODUIT = "Rien";
 		this->PRIX_HT = "RIEN";
 		this->DESIGNATION = "RIEN";
 		this->QUANTITE_STOCK = "RIEN";

@@ -20,6 +20,7 @@ namespace NS_Composants {
 	public:
 		PERSONNEL();
 		String^ SELECT(void);
+		String^ SELECTPERSONNELADRESSE(void);
 		String^ INSERT(void);
 		String^ UPDATE(void);
 		String^ DELETE(void);

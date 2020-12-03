@@ -6,6 +6,11 @@
 #include"COMMANDES.h"
 #include"PRODUITS.h"
 #include"NATURE.h"
+#include"MODE_REGLEMENT.h"
+#include"PAIEMENT.h"
+#include"COULEUR.h"
+#include"TARIF.h"
+
 using namespace System::Data;
 using namespace System::Data::SqlClient;
 using namespace System::Xml;
@@ -22,6 +27,10 @@ namespace NS_Svc {
 		NS_Composants::COMMANDES^ commande;
 		NS_Composants::PRODUITS^ produit;
 		NS_Composants::NATURE^ nature;
+		NS_Composants::MODE_REGLEMENTS^ reglement;
+		NS_Composants::PAIEMENT^ paiement;
+		NS_Composants::COULEUR^ couleur;
+		NS_Composants::TARIF^ tarif;
 		DataSet^ ds;
 		
 
@@ -29,12 +38,18 @@ namespace NS_Svc {
 		gestion();
 		DataSet^ listeClient(String^);
 		DataSet^ listePersonnel(String^);
+		DataSet^ listePersonnelAdresse(String^);
 		DataSet^ listeAdresse(String^);
 		DataSet^ listeCommande(String^); 
+		DataSet^ listeClientAdresse(String^);
+		DataSet^ listeReglement(String^);
+		DataSet^ listePaiement(String^);
+		DataSet^ listeCouleur(String^);
+		DataSet^ listeTarif(String^);
 		
 		int ajouterClient(String^, String^, String^, String^);
-		void modifier(int, String^, String^, String^, String^);
-		void supprimer(int);
+		void modifierClient(int, String^, String^, String^, String^);
+		void supprimerClient(int);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -58,11 +73,35 @@ namespace NS_Svc {
 
 		int ajouterProduit(String^, String^, String^, String^, String^);
 		void modifierProduit(int, String^, String^, String^, String^, String^);
+		void supprimerProduit(int);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		int ajouterNature(String^);
 		void modifierNature(int, String^);
+		void supprimerNature(int);
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		int ajouterMode(String^);
+		void modifierMode(int, String^);
+
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////		
+
+		int ajouterCouleur(String^);
+		void modifierCouleur(int, String^);
+
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		int ajouterPaiement(String^, String^);
+		void modifierPaiement(int, String^, String^);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		int ajouterTarif(String^);
+		void modifierTarif(int, String^);
+		void supprimerTarif(int);
+
 
 
 	};

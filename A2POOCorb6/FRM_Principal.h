@@ -105,6 +105,8 @@ namespace A2POOCorb6 {
 
 
 
+
+
 	private:
 		System::ComponentModel::Container^ components;
 #pragma region Windows Form Designer generated code
@@ -189,7 +191,7 @@ namespace A2POOCorb6 {
 			this->label2->AutoSize = true;
 			this->label2->Location = System::Drawing::Point(199, 19);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(72, 13);
+			this->label2->Size = System::Drawing::Size(73, 13);
 			this->label2->TabIndex = 4;
 			this->label2->Text = L"Pr�nom Client";
 			// 
@@ -545,7 +547,7 @@ namespace A2POOCorb6 {
 		this->ds = gcnew Data::DataSet();
 		this->gestion = gcnew NS_Svc::gestion();
 		this->loadData(this->index);
-		this->txt_message->Text = "Data charg�es";
+		this->txt_message->Text = "Data chargees";
 	}
 	private: void loadData(int index)
 	{
@@ -565,13 +567,45 @@ namespace A2POOCorb6 {
 			this->TT_8->Text = Convert::ToString(this->ds->Tables["liste"]->Rows[this->index]->ItemArray[8]);
 			this->TT_9->Text = Convert::ToString(this->ds->Tables["liste"]->Rows[this->index]->ItemArray[9]);
 			this->TT_10->Text = Convert::ToString(this->ds->Tables["liste"]->Rows[this->index]->ItemArray[10]);
+
+			this->TT_8->Show();
+			this->TT_9->Show();
+			this->TT_10->Show();
+			this->groupBox1->Show();
+			this->groupBox2->Show();
 		}
+
+		
+		if (this->tableSelect == "Personnel") {
+			this->ds = this->gestion->listePersonnelAdresse("liste");
+			dataGridView1->DataSource = ds;
+			dataGridView1->DataMember = "liste";
+			this->TT_ID->Text = Convert::ToString(this->ds->Tables["liste"]->Rows[this->index]->ItemArray[0]);
+			this->TT_1->Text = Convert::ToString(this->ds->Tables["liste"]->Rows[this->index]->ItemArray[1]);
+			this->TT_2->Text = Convert::ToString(this->ds->Tables["liste"]->Rows[this->index]->ItemArray[2]);
+			this->TT_3->Text = Convert::ToString(this->ds->Tables["liste"]->Rows[this->index]->ItemArray[3]);
+			this->TT_4->Text = Convert::ToString(this->ds->Tables["liste"]->Rows[this->index]->ItemArray[4]);
+			this->TT_5->Text = Convert::ToString(this->ds->Tables["liste"]->Rows[this->index]->ItemArray[5]);
+			this->TT_6->Text = Convert::ToString(this->ds->Tables["liste"]->Rows[this->index]->ItemArray[6]);
+			this->TT_7->Text = Convert::ToString(this->ds->Tables["liste"]->Rows[this->index]->ItemArray[7]);
+			this->TT_8->Hide();
+			this->TT_9->Hide();
+			this->TT_10->Hide();
+			this->groupBox1->Text = "Adresse";
+			this->groupBox2->Hide();
+			
+		
+
+		}
+
+
+
 	}
 	private: System::Void btn_first_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		this->index = 0;
 		this->loadData(this->index);
-		this->txt_message->Text = "Enregistrement n� : " + (this->index + 1);
+		this->txt_message->Text = "Enregistrement n° : " + (this->index + 1);
 	}
 	private: System::Void btn_previous_Click(System::Object^ sender, System::EventArgs^ e)
 	{
@@ -579,7 +613,7 @@ namespace A2POOCorb6 {
 		{
 			this->index--;
 			this->loadData(this->index);
-			this->txt_message->Text = "Enregistrement n� : " + (this->index + 1);
+			this->txt_message->Text = "Enregistrement n° : " + (this->index + 1);
 		}
 	}
 	private: System::Void btn_next_Click(System::Object^ sender, System::EventArgs^ e)
@@ -588,14 +622,14 @@ namespace A2POOCorb6 {
 		{
 			this->index++;
 			this->loadData(this->index);
-			this->txt_message->Text = "Enregistrement n� : " + (this->index + 1);
+			this->txt_message->Text = "Enregistrement n° : " + (this->index + 1);
 		}
 	}
 	private: System::Void btn_end_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		this->index = this->ds->Tables["liste"]->Rows->Count - 1;
 		this->loadData(this->index);
-		this->txt_message->Text = "Enregistrement n� : " + (this->index + 1);
+		this->txt_message->Text = "Enregistrement n° : " + (this->index + 1);
 	}
 	private: System::Void btn_nouveau_Click(System::Object^ sender, System::EventArgs^ e)
 	{
@@ -604,6 +638,12 @@ namespace A2POOCorb6 {
 		this->TT_2->Clear();
 		this->TT_3->Clear();
 		this->TT_4->Clear();
+		this->TT_5->Clear();
+		this->TT_6->Clear();
+		this->TT_7->Clear();
+		this->TT_8->Clear();
+		this->TT_9->Clear();
+		this->TT_10->Clear();
 		this->mode = "nouv";
 		this->txt_message->Text = "Veuillez saisir les information de la nouvelle personne et enregistrer";
 	}
@@ -622,11 +662,16 @@ namespace A2POOCorb6 {
 		if (this->mode == "nouv")
 		{
 			int Id;
-			if(this->tableSelect == "Client")
+			if (this->tableSelect == "Client")
 				Id = this->gestion->ajouterClient(this->TT_1->Text, this->TT_2->Text, this->TT_3->Text, this->TT_4->Text);
 			if(this->tableSelect == "Adresse")
-				Id = this->gestion->ajouterAdresse(this->btn_2->Text, this->btn_3->Text, this->btn_4->Text);
-			this->txt_message->Text = "L'ID généré est le : " + Id + ". ";
+
+				Id = this->gestion->ajouterAdresse(this->TT_2->Text, this->TT_3->Text, this->TT_4->Text);
+			this->txt_message->Text = "L'ID genere est le : " + Id + ". ";
+
+				Id = this->gestion->ajouterAdresse(this->TT_2->Text, this->TT_3->Text, this->TT_4->Text);
+			this->txt_message->Text = "L'ID genere est le : " + Id + ". ";
+
 		}
 		else if (this->mode == "maj")
 		{
@@ -644,17 +689,17 @@ namespace A2POOCorb6 {
 		}
 		this->index = 0;
 		this->loadData(this->index);
-		this->txt_message->Text += "Traitement termin�.";
+		this->txt_message->Text += "Traitement termine.";
 	}
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 	if(comboBox1->SelectedIndex == -1)
-		this->txt_message->Text = "Veuillez s�lectionner une table";
+		this->txt_message->Text = "Veuillez selectionner une table";
 	else {
 		if (comboBox1->SelectedIndex == 0) {
 			this->tableSelect = "Client";
 			lbl_Id->Text = "ID Client";
 			label1->Text = "Nom Client";
-			label2->Text = "Pr�nom Client";
+			label2->Text = "Prenom Client";
 			label3->Text = "Date de naissance";
 			label4->Text = "Date premiere commande";
 			label5->Text = "Rue";
@@ -663,11 +708,34 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 			label8->Text = "Rue";
 			label9->Text = "Code Postal";
 			label10->Text = "Ville";
+
+			label8->Show();
+			label9->Show();
+			label10->Show();
+
+			this->loadData(this->index);
+		}
+		if (comboBox1->SelectedIndex == 3) {
+			this->tableSelect = "Personnel";
+			lbl_Id->Text = "ID Personnel";
+			label1->Text = "Nom Personnel";
+			label2->Text = "Prenom Personnel";
+			label3->Text = "Adresse mail Personnel";
+			label4->Text = "Date Embauche";
+			label5->Text = "Rue";
+			label6->Text = "Code Postal";
+			label7->Text = "Ville";
+			label8->Hide();
+			label9->Hide();
+			label10->Hide();
+			groupBox1->Text = "Adresse";
+			
 			this->loadData(this->index);
 		}
 
-		this->txt_message->Text = "La table " + comboBox1->SelectedItem + " a �t� s�lection�e";
+		this->txt_message->Text = "La table " + comboBox1->SelectedItem + " a ete selectionee";
 	}
 }
+
 };
 }
