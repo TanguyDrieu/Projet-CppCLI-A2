@@ -87,14 +87,24 @@ namespace NS_Svc
 	}
 
 
-	int gestion::ajouterClient(String^ NOM_CLIENT, String^ PRENOM_CLIENT, String^ DATE_NAISSANCE_CLIENT, String^ DATE_PREMIERE_COMMANDE_CLIENT)
+	int gestion::ajouterClient(String^ NOM_CLIENT, String^ PRENOM_CLIENT, String^ DATE_NAISSANCE_CLIENT, String^ DATE_PREMIERE_COMMANDE_CLIENT, String^ RUE_FAC, int CODE_POSTAL_FAC, String^ VILLE_FAC, String^ RUE_LIV, int CODE_POSTAL_LIV, String^ VILLE_LIV)
 	{
 		int id_personne;
 		this->client->setNOM_CLIENT(NOM_CLIENT);
 		this->client->setPRENOM_CLIENT(PRENOM_CLIENT);
 		this->client->setDATE_NAISSANCE_CLIENT(DATE_NAISSANCE_CLIENT);
 		this->client->setDATE_PREMIERE_COMMANDE_CLIENT(DATE_PREMIERE_COMMANDE_CLIENT);
+		this->adresse->setRUE(RUE_FAC);
+		this->adresse->setCODE_POSTAL(CODE_POSTAL_FAC);
+		this->adresse->setVILLE(VILLE_FAC);
+		this->adresse->setRUE(RUE_LIV);
+		this->adresse->setCODE_POSTAL(CODE_POSTAL_LIV);
+		this->adresse->setVILLE(VILLE_LIV);
 		id_personne = this->cad->actionRowsID(this->client->INSERT());
+		id_personne = this->cad->actionRowsID(this->adresse->INSERT());
+		this->adresse->setID_CLIENT_FAC(id_personne);
+		this->adresse->setID_CLIENT_LIV(id_personne);
+		
 		return id_personne;
 	}
 	void gestion::modifierClient(int ID_CLIENT, String^ NOM_CLIENT, String^ PRENOM_CLIENT, String^ DATE_NAISSANCE_CLIENT, String^ DATE_PREMIERE_COMMANDE_CLIENT)
@@ -145,7 +155,7 @@ namespace NS_Svc
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	int gestion::ajouterAdresse(String^ RUE, String^ CODE_POSTAL, String^ VILLE)
+	int gestion::ajouterAdresse(String^ RUE, int CODE_POSTAL, String^ VILLE)
 	{
 		int id_adresse;
 		this->adresse->setRUE(RUE);
@@ -154,7 +164,7 @@ namespace NS_Svc
 		id_adresse = this->cad->actionRowsID(this->adresse->INSERT());
 		return id_adresse;
 	}
-	void gestion::modifierAdresse(int ID_ADRESSE, String^ RUE, String^ CODE_POSTAL, String^ VILLE)
+	void gestion::modifierAdresse(int ID_ADRESSE, String^ RUE, int CODE_POSTAL, String^ VILLE)
 	{
 		this->adresse->setID_ADRESSE(ID_ADRESSE);
 		this->adresse->setRUE(RUE);

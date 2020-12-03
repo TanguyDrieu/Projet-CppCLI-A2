@@ -7,7 +7,7 @@ namespace NS_Composants
 		
 		this->ID_ADRESSE = -1;
 		this->RUE = "RIEN";
-		this->CODE_POSTAL = "RIEN";
+		
 		this->VILLE = "RIEN";
 		
 	}
@@ -51,12 +51,12 @@ namespace NS_Composants
 			this->RUE = RUE;
 		}
 	}
-	void ADRESSE::setCODE_POSTAL(String^ CODE_POSTAL)
+	void ADRESSE::setCODE_POSTAL(int CODE_POSTAL)
 	{
-		if (CODE_POSTAL != "")
-		{
+		
+		
 			this->CODE_POSTAL = CODE_POSTAL;
-		}
+		
 	}
 	void ADRESSE::setVILLE(String^ VILLE)
 	{
@@ -65,6 +65,26 @@ namespace NS_Composants
 			this->VILLE = VILLE;
 		}
 	}
+
+	void ADRESSE::setID_CLIENT_FAC(int ID_CLIENT_FAC) 
+	{
+
+		this->ID_CLIENT_FAC = ID_CLIENT_FAC;
+
+	}
+
+	void ADRESSE::setID_CLIENT_LIV(int ID_CLIENT_LIV)
+	{
+
+		this->ID_CLIENT_LIV = ID_CLIENT_LIV;
+
+	}
+
+
+
+
+
+
 
 	int ADRESSE::getID_ADRESSE(void)
 	{
@@ -78,7 +98,7 @@ namespace NS_Composants
 	{
 		return this->RUE;
 	}
-	String^ ADRESSE::getCODE_POSTAL(void)
+	int ADRESSE::getCODE_POSTAL(void)
 	{
 		return this->CODE_POSTAL;
 	}
