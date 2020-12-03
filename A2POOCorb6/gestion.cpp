@@ -100,10 +100,11 @@ namespace NS_Svc
 		this->adresse->setRUE(RUE_LIV);
 		this->adresse->setCODE_POSTAL(CODE_POSTAL_LIV);
 		this->adresse->setVILLE(VILLE_LIV);
-		id_personne = this->cad->actionRowsID(this->client->INSERT());
-		id_personne = this->cad->actionRowsID(this->adresse->INSERT());
 		this->adresse->setID_CLIENT_FAC(id_personne);
 		this->adresse->setID_CLIENT_LIV(id_personne);
+		id_personne = this->cad->actionRowsID(this->client->INSERT());
+		id_personne = this->cad->actionRowsID(this->adresse->INSERT());
+		
 		
 		return id_personne;
 	}
