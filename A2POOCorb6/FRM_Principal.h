@@ -4,6 +4,8 @@
 #include"ADRESSE.h"
 #include"COMMANDES.h"
 #include"PRODUITS.h"
+#include"STATISTIQUES.h"
+#include "STATISTIQUES.h"
 
 namespace A2POOCorb6 {
 	using namespace System;
@@ -915,7 +917,20 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 			groupBox1->Hide();
 			btn_egal->Hide();
 
+			
+
 			this->loadData(this->index);
+		}
+
+		if (comboBox1->SelectedIndex == 4) {
+			STATISTIQUES^ stats = gcnew STATISTIQUES();
+			stats->Show();
+
+
+
+
+
+
 		}
 
 		this->txt_message->Text = "La table " + comboBox1->SelectedItem + " a ete selectionee";
