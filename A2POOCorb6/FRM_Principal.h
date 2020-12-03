@@ -783,13 +783,12 @@ namespace A2POOCorb6 {
 				Id = this->gestion->ajouterPersonnel(Convert::ToInt32(this->TT_1->Text), this->TT_2->Text, this->TT_3->Text, this->TT_4->Text, this->TT_Pers->Text, this->TT_5->Text, Convert::ToInt32(this->TT_6->Text), this->TT_7->Text);
 			if (this->tableSelect == "Stock")
 				this->gestion->ajouterProduit(this->TT_ID->Text, Convert::ToInt32(this->TT_1->Text), Convert::ToInt32(this->TT_2->Text), Convert::ToDouble(this->TT_3->Text), this->TT_4->Text, Convert::ToInt32(this->TT_5->Text), Convert::ToInt32(this->TT_6->Text), this->TT_7->Text);
+			if(this->tableSelect == "Commande")
 			Id = this->gestion->ajouterCommande(this->TT_ID->Text, this->TT_1->Text, this->TT_2->Text, this->TT_3->Text, Convert::ToInt32(this->TT_4->Text), Convert::ToInt32(this->TT_5->Text), Convert::ToInt32(this->TT_6->Text), this->TT_7->Text, Convert::ToInt32(this->TT_8->Text), this->TT_9->Text, this->TT_10->Text, Convert::ToInt32(this->TT_11->Text));//
 
 			
 
 
-				Id = this->gestion->ajouterAdresse(this->TT_2->Text, this->TT_3->Text, this->TT_4->Text);
-			this->txt_message->Text = "L'ID genere est le : " + Id + ". ";*/
 
 		}
 		else if (this->mode == "maj")
