@@ -72,8 +72,8 @@ namespace NS_Svc {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		int ajouterProduit(String^, String^, String^, String^, String^);
-		void modifierProduit(int, String^, String^, String^, String^, String^);
-		void supprimerProduit(int);
+		void modifierProduit(String^, String^, String^, String^, String^, String^);
+		void supprimerProduit(String^);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

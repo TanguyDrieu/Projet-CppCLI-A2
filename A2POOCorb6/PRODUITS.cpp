@@ -38,9 +38,9 @@ namespace NS_Composants
 			"WHERE(REF_PRODUIT = " + this->getREF_PRODUIT() + ");";
 	}
 
-	void PRODUITS::setREF_PRODUIT(int REF_PRODUIT)
+	void PRODUITS::setREF_PRODUIT(String^ REF_PRODUIT)
 	{
-		if (REF_PRODUIT > 0)
+		if (REF_PRODUIT != "")
 		{
 			this->REF_PRODUIT = REF_PRODUIT;
 		}
@@ -83,7 +83,7 @@ namespace NS_Composants
 		}
 	}
 
-	int PRODUITS::getREF_PRODUIT(void)
+	String^ PRODUITS::getREF_PRODUIT(void)
 	{
 
 		return this->REF_PRODUIT;

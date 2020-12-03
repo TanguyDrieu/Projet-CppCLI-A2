@@ -212,7 +212,7 @@ namespace NS_Svc
 		id_produit = this->cad->actionRowsID(this->produit->INSERT());
 		return id_produit;
 	}
-	void gestion::modifierProduit(int REF_PRODUIT, String^ PRIX_HT, String^ DESIGNATION, String^ QUANTITE_STOCK, String^ SEUIL_REAPPROVISIONNEMENT, String^ TAUX_TVA)
+	void gestion::modifierProduit(String^ REF_PRODUIT, String^ PRIX_HT, String^ DESIGNATION, String^ QUANTITE_STOCK, String^ SEUIL_REAPPROVISIONNEMENT, String^ TAUX_TVA)
 	{
 		this->produit->setREF_PRODUIT(REF_PRODUIT);
 		this->produit->setPRIX_HT(PRIX_HT);
@@ -222,7 +222,7 @@ namespace NS_Svc
 		this->produit->setTAUX_TVA(TAUX_TVA);
 		this->cad->actionRows(this->produit->UPDATE());
 	}
-	void gestion::supprimerProduit(int REF_PRODUIT)
+	void gestion::supprimerProduit(String^ REF_PRODUIT)
 	{
 		this->produit->setREF_PRODUIT(REF_PRODUIT);
 		this->cad->actionRows(this->produit->DELETE());

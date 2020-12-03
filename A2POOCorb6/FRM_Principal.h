@@ -726,6 +726,7 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 			label8->Show();
 			label9->Show();
 			label10->Show();
+			btn_egal->Show();
 
 			this->loadData(this->index);
 		}
@@ -743,7 +744,8 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 			label9->Hide();
 			label10->Hide();
 			groupBox1->Text = "Adresse";
-			
+			btn_egal->Hide();
+
 			this->loadData(this->index);
 		}
 
