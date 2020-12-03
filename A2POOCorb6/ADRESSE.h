@@ -11,9 +11,12 @@ namespace NS_Composants {
 	private:
 		
 		int ID_ADRESSE;
+		int ID_CLIENT_FAC;
+		int ID_CLIENT_LIV;
 		String^ RUE;
-		String^ CODE_POSTAL;
+		int CODE_POSTAL;
 		String^ VILLE;
+		
 
 
 	public:
@@ -23,12 +26,14 @@ namespace NS_Composants {
 		String^ UPDATE(void);
 		String^ DELETE(void);
 		void setRUE(String^);
-		void setCODE_POSTAL(String^);
+		void setCODE_POSTAL(int);
 		void setVILLE(String^);
+		void setID_CLIENT_FAC(int);
+		void setID_CLIENT_LIV(int);
 		
 		void setID_ADRESSE(int);
 		String^ getRUE(void);
-		String^ getCODE_POSTAL(void);
+		int getCODE_POSTAL(void);
 		String^ getVILLE(void);
 		
 		int getID_ADRESSE(void);

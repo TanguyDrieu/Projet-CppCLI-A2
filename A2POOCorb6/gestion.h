@@ -47,7 +47,7 @@ namespace NS_Svc {
 		DataSet^ listeCouleur(String^);
 		DataSet^ listeTarif(String^);
 		
-		int ajouterClient(String^, String^, String^, String^);
+		int ajouterClient(String^, String^, String^, String^, String^, int, String^, String^, int, String^);
 		void modifierClient(int, String^, String^, String^, String^);
 		void supprimerClient(int);
 
@@ -59,8 +59,8 @@ namespace NS_Svc {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int ajouterAdresse(String^, String^, String^);
-		void modifierAdresse(int, String^, String^, String^);
+		int ajouterAdresse(String^, int, String^);
+		void modifierAdresse(int, String^, int, String^);
 		void supprimerAdresse(int);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////

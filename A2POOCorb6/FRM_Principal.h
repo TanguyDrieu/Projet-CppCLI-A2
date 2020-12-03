@@ -677,22 +677,22 @@ namespace A2POOCorb6 {
 		{
 			int Id;
 			if (this->tableSelect == "Client")
-				Id = this->gestion->ajouterClient(this->TT_1->Text, this->TT_2->Text, this->TT_3->Text, this->TT_4->Text);
-			if(this->tableSelect == "Adresse")
+				Id = this->gestion->ajouterClient(this->TT_1->Text, this->TT_2->Text, this->TT_3->Text, this->TT_4->Text, this->TT_5->Text,	Convert::ToInt32(this->TT_6->Text), this->TT_7->Text, this->TT_8->Text,Convert::ToInt32(this->TT_9->Text), this->TT_10->Text);
+			//if(this->tableSelect == "Adresse")
 
-				Id = this->gestion->ajouterAdresse(this->TT_2->Text, this->TT_3->Text, this->TT_4->Text);
+			/*	Id = this->gestion->ajouterAdresse(this->TT_2->Text, this->TT_3->Text, this->TT_4->Text);
 			this->txt_message->Text = "L'ID genere est le : " + Id + ". ";
 
 				Id = this->gestion->ajouterAdresse(this->TT_2->Text, this->TT_3->Text, this->TT_4->Text);
-			this->txt_message->Text = "L'ID genere est le : " + Id + ". ";
+			this->txt_message->Text = "L'ID genere est le : " + Id + ". ";*/
 
 		}
 		else if (this->mode == "maj")
 		{
 			if (this->tableSelect == "Client")
 				this->gestion->modifierClient(Convert::ToInt32(this->TT_ID->Text), this->TT_1->Text, this->TT_2->Text, this->TT_3->Text, this->TT_4->Text);
-			if (this->tableSelect == "Adresse")
-				this->gestion->modifierAdresse(Convert::ToInt32(this->TT_ID->Text), this->TT_2->Text, this->TT_3->Text, this->TT_4->Text);
+			/*if (this->tableSelect == "Adresse")
+				this->gestion->modifierAdresse(Convert::ToInt32(this->TT_ID->Text), this->TT_2->Text, this->TT_3->Text, this->TT_4->Text);*/
 		}
 		else if (this->mode == "sup")
 		{
