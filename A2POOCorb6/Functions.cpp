@@ -5,18 +5,16 @@ namespace NS_Composants
 	{
 	this->rq_sql = "RIEN";
 	connStrinfBuilder = gcnew SqlConnectionStringBuilder();
-	connStrinfBuilder->DataSource = "DESKTOP-PQR7KBN";
+	connStrinfBuilder->DataSource = "VICTORIEN";
 	connStrinfBuilder->InitialCatalog = "PROJET_CASTORAMA";
 	connStrinfBuilder->IntegratedSecurity = true;
 
 
 	this->CNX = gcnew SqlConnection(Convert::ToString(connStrinfBuilder));
-		//this->cnx = "Data Source=VICTORIEN;" +
-		//	"Initial Catalog=tanguy;" +
-		//	"IntegratedSecurity = true";
+		
 			
 			
-		//this->CNX = gcnew SqlConnection(this->cnx);
+		
 		this->CMD = gcnew SqlCommand(this->rq_sql, this->CNX);
 		this->CMD->CommandType = CommandType::Text;
 	}

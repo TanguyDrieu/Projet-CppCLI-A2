@@ -12,7 +12,8 @@ namespace NS_Composants {
 	private:
 		int ID_PAIEMENT;
 		String^ DATE_PAIEMENT;
-		String^ MONTANT_PAIEMENT;
+		int MONTANT_PAIEMENT;
+		int ID_MODEP;
 
 
 	public:
@@ -24,13 +25,15 @@ namespace NS_Composants {
 
 
 		void setDATE_PAIEMENT(String^);
-		void setMONTANT_PAIEMENT(String^);
+		void setMONTANT_PAIEMENT(int);
 		void setID_PAIEMENT(int);
+		void setID_MODEP(int);
 
 
 		String^ getDATE_PAIEMENT(void);
-		String^ getMONTANT_PAIEMENT(void);
+		int getMONTANT_PAIEMENT(void);
 		int getID_PAIEMENT(void);
+		int getID_MODEP(void);
 
 
 

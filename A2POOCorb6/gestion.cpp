@@ -6,6 +6,7 @@
 #include"MODE_REGLEMENT.h"
 #include"COULEUR.h"
 #include"PAIEMENT.h"
+#include"COMMANDES.h"
 namespace NS_Svc
 {
 	gestion::gestion(void)
@@ -16,7 +17,9 @@ namespace NS_Svc
 		this->personnel = gcnew NS_Composants::PERSONNEL();
 		this->commande = gcnew NS_Composants::COMMANDES();
 		this->tarif = gcnew NS_Composants::TARIF();
-		//this->reglement = gcnew NS_Composants::MODE_REGLEMENT();
+		this->reglement = gcnew NS_Composants::MODE_REGLEMENTS();
+		this->contenir = gcnew NS_Composants::CONTENIR();
+		this->paiement = gcnew NS_Composants::PAIEMENT();
 
 		this->ds = gcnew Data::DataSet();
 	}
@@ -75,17 +78,14 @@ namespace NS_Svc
 		this->ds = this->cad->getRows(this->couleur->SELECT(), dataTableName);
 		return this->ds;
 	}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 	DataSet^ gestion::listeTarif(String^ dataTableName)
 	{
 		this->ds->Clear();
 		this->ds = this->cad->getRows(this->tarif->SELECT(), dataTableName);
 		return this->ds;
 	}
-
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	int gestion::ajouterClient(String^ NOM_CLIENT, String^ PRENOM_CLIENT, String^ DATE_NAISSANCE_CLIENT, String^ DATE_PREMIERE_COMMANDE_CLIENT, String^ RUE_FAC, int CODE_POSTAL_FAC, String^ VILLE_FAC, String^ RUE_LIV, int CODE_POSTAL_LIV, String^ VILLE_LIV)
 	{
@@ -192,22 +192,15 @@ namespace NS_Svc
 	}
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	int gestion::ajouterCommande(String^ DATE_LIVRAISON_PREVUE, String^ DATE_EMISSION_COMMANDE, String^ DATE_SOLDE_REGLEMENT, String^ MONTANT_HT, String^ MONTANT_TVA, String^ MONTANT_TTC, String^ DATE_EMISSION_FACTURE)
+
+	int gestion::ajouterCommande(String^ REF_COMMANDE, String^ DATE_LIVRAISON_PREVUE, String^ DATE_EMISSION_COMMANDE, String^ DATE_SOLDE_REGLEMENT, int MONTANT_HT, int MONTANT_TVA, int MONTANT_TTC, String^ DATE_EMISSION_FACTURE, int MONTANT_PAIEMENT, String^ DATE_PAIEMENT, String^ MODE_REGLEMENT, int QUANTITE_ARTICLE)
 	{
-		int ref_commande;
-		this->commande->setDATE_LIVRAISON_PREVUE(DATE_LIVRAISON_PREVUE);
-		this->commande->setDATE_EMISSION_COMMANDE(DATE_EMISSION_COMMANDE);
-		this->commande->setDATE_SOLDE_REGLEMENT(DATE_SOLDE_REGLEMENT);
-		this->commande->setMONTANT_HT(MONTANT_HT);
-		this->commande->setMONTANT_TVA(MONTANT_TVA);
-		this->commande->setMONTANT_TTC(MONTANT_TTC);
-		this->commande->setDATE_EMISSION_FACTURE(DATE_EMISSION_FACTURE);
-		ref_commande = this->cad->actionRowsID(this->commande->INSERT());
-		return ref_commande;
-	}
-	void gestion::modifierCommande(int REF_COMMANDE, String^ DATE_LIVRAISON_PREVUE, String^ DATE_EMISSION_COMMANDE, String^ DATE_SOLDE_REGLEMENT, String^ MONTANT_HT, String^ MONTANT_TVA, String^ MONTANT_TTC, String^ DATE_EMISSION_FACTURE)
-	{
+		int id_commande;
 		this->commande->setREF_COMMANDE(REF_COMMANDE);
+		this->commande->setID_CLIENTC(id_commande);
+		this->paiement->setID_PAIEMENT(id_commande);
+		this->paiement->setID_MODEP(id_commande);
+		this->reglement->setID_MODE(id_commande);
 		this->commande->setDATE_LIVRAISON_PREVUE(DATE_LIVRAISON_PREVUE);
 		this->commande->setDATE_EMISSION_COMMANDE(DATE_EMISSION_COMMANDE);
 		this->commande->setDATE_SOLDE_REGLEMENT(DATE_SOLDE_REGLEMENT);
@@ -215,9 +208,24 @@ namespace NS_Svc
 		this->commande->setMONTANT_TVA(MONTANT_TVA);
 		this->commande->setMONTANT_TTC(MONTANT_TTC);
 		this->commande->setDATE_EMISSION_FACTURE(DATE_EMISSION_FACTURE);
-		this->cad->actionRows(this->commande->UPDATE());
+		id_commande = this->cad->actionRowsID(this->commande->INSERT());
+		this->paiement->setMONTANT_PAIEMENT(MONTANT_PAIEMENT);
+		this->paiement->setDATE_PAIEMENT(DATE_PAIEMENT);
+		this->reglement->setMODE_REGLEMENT(MODE_REGLEMENT);
+		this->contenir->setQUANTITE_ARTICLE(QUANTITE_ARTICLE);
+		
+	
+		this->cad->actionRowsID(this->paiement->INSERT());
+		this->cad->actionRowsID(this->reglement->INSERT());
+		this->cad->actionRowsID(this->contenir->INSERT());
+		return id_commande;
+
+		
+			
 	}
-	void gestion::supprimerCommande(int REF_COMMANDE)
+	
+
+	void gestion::supprimerCommande(String^ REF_COMMANDE)
 	{
 		this->commande->setREF_COMMANDE(REF_COMMANDE);
 		this->cad->actionRows(this->commande->DELETE());
@@ -315,14 +323,7 @@ namespace NS_Svc
 		id_paiement = this->cad->actionRowsID(this->paiement->INSERT());
 		return id_paiement;
 	}
-	void gestion::modifierPaiement(int ID_PAIEMENT, String^ DATE_PAIEMENT, String^ MONTANT_PAIEMENT)
-	{
-		this->paiement->setID_PAIEMENT(ID_PAIEMENT);
-		this->paiement->setDATE_PAIEMENT(DATE_PAIEMENT);
-		this->paiement->setMONTANT_PAIEMENT(MONTANT_PAIEMENT);
-		this->cad->actionRows(this->paiement->UPDATE());
-
-	}
+	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	int gestion::ajouterTarif(String^ INTITULE_TARIF)

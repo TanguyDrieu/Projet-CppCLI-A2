@@ -10,6 +10,7 @@
 #include"PAIEMENT.h"
 #include"COULEUR.h"
 #include"TARIF.h"
+#include"CONTENIR.h"
 
 using namespace System::Data;
 using namespace System::Data::SqlClient;
@@ -31,6 +32,7 @@ namespace NS_Svc {
 		NS_Composants::PAIEMENT^ paiement;
 		NS_Composants::COULEUR^ couleur;
 		NS_Composants::TARIF^ tarif;
+		NS_Composants::CONTENIR^ contenir;
 		DataSet^ ds;
 		
 
@@ -46,6 +48,7 @@ namespace NS_Svc {
 		DataSet^ listePaiement(String^);
 		DataSet^ listeCouleur(String^);
 		DataSet^ listeTarif(String^);
+		
 		
 		int ajouterClient(String^, String^, String^, String^, String^, int, String^, String^, int, String^);
 		void modifierClient(int, String^, String^, String^, String^);
@@ -65,9 +68,9 @@ namespace NS_Svc {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int ajouterCommande(String^, String^, String^, String^, String^, String^, String^);
-		void modifierCommande(int, String^, String^, String^, String^, String^, String^, String^);
-		void supprimerCommande(int);
+		int ajouterCommande(String^ , String^ , String^ , String^ , int , int , int, String^ , int , String^ , String^ , int );
+		//void modifierCommande(String^, String^, String^, String^, String^, String^, String^, String^);
+		void supprimerCommande(String^);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -94,7 +97,7 @@ namespace NS_Svc {
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		int ajouterPaiement(String^, String^);
-		void modifierPaiement(int, String^, String^);
+		//void modifierPaiement(int, String^, String^);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -102,7 +105,9 @@ namespace NS_Svc {
 		void modifierTarif(int, String^);
 		void supprimerTarif(int);
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	
 
 	};
 }

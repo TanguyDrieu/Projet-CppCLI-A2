@@ -7,7 +7,8 @@ namespace NS_Composants
 
 		this->ID_PAIEMENT = -1;
 		this->DATE_PAIEMENT = "RIEN";
-		this->MONTANT_PAIEMENT = "RIEN";
+		this->MONTANT_PAIEMENT = -1;
+		this->ID_MODEP = -1;
 
 	}
 	String^ PAIEMENT::SELECT(void)
@@ -50,9 +51,9 @@ namespace NS_Composants
 			this->DATE_PAIEMENT = DATE_PAIEMENT;
 		}
 	}
-	void PAIEMENT::setMONTANT_PAIEMENT(String^ MONTANT_PAIEMENT)
+	void PAIEMENT::setMONTANT_PAIEMENT(int MONTANT_PAIEMENT)
 	{
-		if (MONTANT_PAIEMENT != "")
+		if (MONTANT_PAIEMENT > 0 )
 		{
 			this->MONTANT_PAIEMENT = MONTANT_PAIEMENT;
 		}
@@ -72,9 +73,22 @@ namespace NS_Composants
 		return this->DATE_PAIEMENT;
 	}
 
-	String^ PAIEMENT::getMONTANT_PAIEMENT(void)
+	int PAIEMENT::getMONTANT_PAIEMENT(void)
 	{
 		return this->MONTANT_PAIEMENT;
+	}
+	int PAIEMENT::getID_MODEP(void)
+	{
+		
+			return this->ID_MODEP = ID_MODEP;
+		
+	}
+	void PAIEMENT::setID_MODEP(int ID_MODEP)
+	{
+		if (ID_MODEP > 0)
+		{
+			this->ID_MODEP = ID_MODEP;
+		}
 	}
 
 

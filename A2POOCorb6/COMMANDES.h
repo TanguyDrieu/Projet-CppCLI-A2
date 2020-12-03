@@ -10,18 +10,20 @@ namespace NS_Composants {
 	{
 
 	private:
-		int REF_COMMANDE;
+		String^ REF_COMMANDE;
 		String^ DATE_LIVRAISON_PREVUE;
 		String^ DATE_EMISSION_COMMANDE;
 		String^ DATE_SOLDE_REGLEMENT;
-		String^ MONTANT_HT;
-		String^ MONTANT_TVA;
-		String^ MONTANT_TTC;
+		double MONTANT_HT;
+		double MONTANT_TVA;
+		double MONTANT_TTC;
 		String^ DATE_EMISSION_FACTURE;
+		int ID_CLIENTC;
 
 	public:
 		COMMANDES();
 		String^ SELECT(void);
+		String^ SELECTCOMMANDE(void);
 		String^ INSERT(void);
 		String^ UPDATE(void);
 		String^ DELETE(void);
@@ -31,22 +33,23 @@ namespace NS_Composants {
 		void setDATE_EMISSION_COMMANDE(String^);
 		
 		void setDATE_SOLDE_REGLEMENT(String^);
-		void setMONTANT_HT(String^);
-		void setMONTANT_TVA(String^);
-		void setMONTANT_TTC(String^);
+		void setMONTANT_HT(double);
+		void setMONTANT_TVA(double);
+		void setMONTANT_TTC(double);
 		void setDATE_EMISSION_FACTURE(String^);
-		void setREF_COMMANDE(int);
-
+		void setREF_COMMANDE(String^);
+		void setID_CLIENTC(int);
 
 		String^ getDATE_LIVRAISON_PREVUE(void);
 		String^ getDATE_EMISSION_COMMANDE(void);
 		String^ getDATE_SOLDE_REGLEMENT(void);
-		String^ getMONTANT_HT(void);
-		String^ getMONTANT_TVA(void);
-		String^ getMONTANT_TTC(void);
+		double getMONTANT_HT(void);
+		double getMONTANT_TVA(void);
+		double getMONTANT_TTC(void);
 		String^ getDATE_EMISSION_FACTURE(void);
 		
-		int getREF_COMMANDE(void);
+		String^ getREF_COMMANDE(void);
+		int getID_CLIENTC(void);
 
 
 
