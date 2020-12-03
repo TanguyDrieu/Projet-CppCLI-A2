@@ -3,9 +3,6 @@
 using namespace System;
 namespace NS_Composants {
 
-
-
-
 	ref class CLIENT
 	{
 
@@ -33,8 +30,5 @@ namespace NS_Composants {
 		String^ getDATE_NAISSANCE_CLIENT(void);
 		String^ getDATE_PREMIERE_COMMANDE_CLIENT(void);
 		int getId(void);
-
-
-
 	};
 }

@@ -50,7 +50,7 @@ namespace NS_Composants
 	}
 	void COMMANDES::setREF_COMMANDE(String^ REF_COMMANDE)
 	{
-		if (REF_COMMANDE != "")
+		if (REF_COMMANDE != "RIEN")
 		{
 			this->REF_COMMANDE = REF_COMMANDE;
 		}

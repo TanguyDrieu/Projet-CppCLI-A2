@@ -3,6 +3,7 @@
 #include"CLIENT.h"
 #include"ADRESSE.h"
 #include"COMMANDES.h"
+#include"PRODUITS.h"
 
 namespace A2POOCorb6 {
 	using namespace System;
@@ -96,6 +97,8 @@ namespace A2POOCorb6 {
 	private: System::Windows::Forms::GroupBox^ groupBox2;
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
 	private: System::Windows::Forms::Button^ btn_egal;
+	private: System::Windows::Forms::TextBox^ TT_Pers;
+	private: System::Windows::Forms::Label^ lbl_Pers;
 	private: System::Windows::Forms::TextBox^ TT_11;
 
 
@@ -161,6 +164,8 @@ namespace A2POOCorb6 {
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
 			this->btn_egal = (gcnew System::Windows::Forms::Button());
+			this->TT_Pers = (gcnew System::Windows::Forms::TextBox());
+			this->lbl_Pers = (gcnew System::Windows::Forms::Label());
 			this->TT_11 = (gcnew System::Windows::Forms::TextBox());
 			this->label11 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
@@ -179,6 +184,7 @@ namespace A2POOCorb6 {
 			// 
 			this->TT_ID->Location = System::Drawing::Point(12, 35);
 			this->TT_ID->Name = L"TT_ID";
+			this->TT_ID->ReadOnly = true;
 			this->TT_ID->Size = System::Drawing::Size(89, 20);
 			this->TT_ID->TabIndex = 1;
 			// 
@@ -524,6 +530,22 @@ namespace A2POOCorb6 {
 			this->label11->TabIndex = 43;
 			this->label11->Text = L"label11";
 			// 
+			// TT_Pers
+			// 
+			this->TT_Pers->Location = System::Drawing::Point(487, 35);
+			this->TT_Pers->Name = L"TT_Pers";
+			this->TT_Pers->Size = System::Drawing::Size(89, 20);
+			this->TT_Pers->TabIndex = 41;
+			// 
+			// lbl_Pers
+			// 
+			this->lbl_Pers->AutoSize = true;
+			this->lbl_Pers->Location = System::Drawing::Point(484, 19);
+			this->lbl_Pers->Name = L"lbl_Pers";
+			this->lbl_Pers->Size = System::Drawing::Size(84, 13);
+			this->lbl_Pers->TabIndex = 40;
+			this->lbl_Pers->Text = L"Date Embauche";
+			// 
 			// FRM_Principal
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -531,6 +553,8 @@ namespace A2POOCorb6 {
 			this->ClientSize = System::Drawing::Size(968, 605);
 			this->Controls->Add(this->label11);
 			this->Controls->Add(this->TT_11);
+			this->Controls->Add(this->TT_Pers);
+			this->Controls->Add(this->lbl_Pers);
 			this->Controls->Add(this->btn_egal);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->label10);
@@ -585,11 +609,13 @@ namespace A2POOCorb6 {
 		this->comboBox1->SelectedIndex = 0;
 		this->index = 0;
 		this->mode = "RIEN";
-		this->tableSelect = "Commande";
+		this->tableSelect = "Client";
 		this->ds = gcnew Data::DataSet();
 		this->gestion = gcnew NS_Svc::gestion();
 		this->loadData(this->index);
 		this->txt_message->Text = "Data chargees";
+		this->TT_Pers->Hide();
+		this->lbl_Pers->Hide();
 	}
 	private: void loadData(int index)
 	{
@@ -617,9 +643,23 @@ namespace A2POOCorb6 {
 			this->groupBox2->Show();
 		}
 
-		
-		if (this->tableSelect == "Personnel") {
+		else if (this->tableSelect == "Personnel") {
 			this->ds = this->gestion->listePersonnelAdresse("liste");
+			dataGridView1->DataSource = ds;
+			dataGridView1->DataMember = "liste";
+			this->TT_ID->Text = Convert::ToString(this->ds->Tables["liste"]->Rows[this->index]->ItemArray[0]);
+			this->TT_1->Text = Convert::ToString(this->ds->Tables["liste"]->Rows[this->index]->ItemArray[2]);
+			this->TT_2->Text = Convert::ToString(this->ds->Tables["liste"]->Rows[this->index]->ItemArray[3]);
+			this->TT_3->Text = Convert::ToString(this->ds->Tables["liste"]->Rows[this->index]->ItemArray[4]);
+			this->TT_4->Text = Convert::ToString(this->ds->Tables["liste"]->Rows[this->index]->ItemArray[5]);
+			this->TT_Pers->Text = Convert::ToString(this->ds->Tables["liste"]->Rows[this->index]->ItemArray[6]);
+			this->TT_5->Text = Convert::ToString(this->ds->Tables["liste"]->Rows[this->index]->ItemArray[7]);
+			this->TT_6->Text = Convert::ToString(this->ds->Tables["liste"]->Rows[this->index]->ItemArray[8]);
+			this->TT_7->Text = Convert::ToString(this->ds->Tables["liste"]->Rows[this->index]->ItemArray[9]);
+		}
+
+		else if (this->tableSelect == "Stock") {
+			this->ds = this->gestion->listeProduits("liste");
 			dataGridView1->DataSource = ds;
 			dataGridView1->DataMember = "liste";
 			this->TT_ID->Text = Convert::ToString(this->ds->Tables["liste"]->Rows[this->index]->ItemArray[0]);
@@ -718,6 +758,7 @@ namespace A2POOCorb6 {
 		this->TT_8->Clear();
 		this->TT_9->Clear();
 		this->TT_10->Clear();
+		this->TT_Pers->Clear();
 		this->mode = "nouv";
 		this->txt_message->Text = "Veuillez saisir les information de la nouvelle personne et enregistrer";
 	}
@@ -738,9 +779,17 @@ namespace A2POOCorb6 {
 			int Id;
 			if (this->tableSelect == "Client")
 				Id = this->gestion->ajouterClient(this->TT_1->Text, this->TT_2->Text, this->TT_3->Text, this->TT_4->Text, this->TT_5->Text,	Convert::ToInt32(this->TT_6->Text), this->TT_7->Text, this->TT_8->Text,Convert::ToInt32(this->TT_9->Text), this->TT_10->Text);
+			if (this->tableSelect == "Personnel")
+				Id = this->gestion->ajouterPersonnel(Convert::ToInt32(this->TT_1->Text), this->TT_2->Text, this->TT_3->Text, this->TT_4->Text, this->TT_Pers->Text, this->TT_5->Text, Convert::ToInt32(this->TT_6->Text), this->TT_7->Text);
+			if (this->tableSelect == "Stock")
+				this->gestion->ajouterProduit(this->TT_ID->Text, Convert::ToInt32(this->TT_1->Text), Convert::ToInt32(this->TT_2->Text), Convert::ToDouble(this->TT_3->Text), this->TT_4->Text, Convert::ToInt32(this->TT_5->Text), Convert::ToInt32(this->TT_6->Text), this->TT_7->Text);
 			Id = this->gestion->ajouterCommande(this->TT_ID->Text, this->TT_1->Text, this->TT_2->Text, this->TT_3->Text, Convert::ToInt32(this->TT_4->Text), Convert::ToInt32(this->TT_5->Text), Convert::ToInt32(this->TT_6->Text), this->TT_7->Text, Convert::ToInt32(this->TT_8->Text), this->TT_9->Text, this->TT_10->Text, Convert::ToInt32(this->TT_11->Text));//
 
 			
+
+
+				Id = this->gestion->ajouterAdresse(this->TT_2->Text, this->TT_3->Text, this->TT_4->Text);
+			this->txt_message->Text = "L'ID genere est le : " + Id + ". ";*/
 
 		}
 		else if (this->mode == "maj")
@@ -751,10 +800,13 @@ namespace A2POOCorb6 {
 		}
 		else if (this->mode == "sup")
 		{
-			if (this->tableSelect == "Client")
+			if (this->tableSelect == "Client") {
 				this->gestion->supprimerClient(Convert::ToInt32(this->TT_ID->Text));
-			if (this->tableSelect == "Adresse")
-				this->gestion->supprimerAdresse(Convert::ToInt32(this->TT_ID->Text));
+				this->gestion->supprimerAdresseClient(Convert::ToInt32(this->TT_ID->Text));
+			}
+			else if (this->tableSelect == "Personnel")
+				this->gestion->supprimerPersonnel(Convert::ToInt32(this->TT_ID->Text));
+				this->gestion->supprimerAdresse(Convert::ToInt32(this->ds->Tables["liste"]->Rows[this->index]->ItemArray[1]));
 		}
 		this->index = 0;
 		this->loadData(this->index);
@@ -765,6 +817,7 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 		this->txt_message->Text = "Veuillez sélectionner une table";
 	else {
 		if (comboBox1->SelectedIndex == 0) {
+			this->TT_ID->ReadOnly = true;
 			this->tableSelect = "Client";
 			lbl_Id->Text = "ID Client";
 			label1->Text = "Nom Client";
@@ -777,7 +830,13 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 			label8->Text = "Rue";
 			label9->Text = "Code Postal";
 			label10->Text = "Ville";
+			groupBox1->Text = "Adresse de facturation";
 
+			TT_Pers->Hide();
+			lbl_Pers->Hide();
+
+			groupBox1->Show();
+			groupBox2->Show();
 			label8->Show();
 			label9->Show();
 			label10->Show();
@@ -785,21 +844,54 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 
 			this->loadData(this->index);
 		}
-		if (comboBox1->SelectedIndex == 3) {
-			this->tableSelect = "Personnel";
-			lbl_Id->Text = "ID Personnel";
-			label1->Text = "Nom Personnel";
-			label2->Text = "Prenom Personnel";
-			label3->Text = "Adresse mail Personnel";
-			label4->Text = "Date Embauche";
-			label5->Text = "Rue";
-			label6->Text = "Code Postal";
-			label7->Text = "Ville";
+		if (comboBox1->SelectedIndex == 2) {
+			this->TT_ID->ReadOnly = false;
+			this->tableSelect = "Stock";
+			lbl_Id->Text = "Ref Produit";
+			label1->Text = "ID Nature";
+			label2->Text = "ID Tarif";
+			label3->Text = "Prix HT";
+			label4->Text = "Désignation";
+			label5->Text = "Quantité en stock";
+			label6->Text = "Seuil de réaprovisionnement";
+			label7->Text = "Taux TVA";
 			label8->Hide();
 			label9->Hide();
 			label10->Hide();
-			groupBox1->Text = "Adresse";
+			groupBox1->Hide();
+			groupBox2->Hide();
 			btn_egal->Hide();
+			this->TT_8->Hide();
+			this->TT_9->Hide();
+			this->TT_10->Hide();
+
+			this->loadData(this->index);
+		}
+		if (comboBox1->SelectedIndex == 3) {
+			this->TT_ID->ReadOnly = true;
+			this->tableSelect = "Personnel";
+			lbl_Id->Text = "ID Personnel";
+			label1->Text = "ID Supérieur";
+			label2->Text = "Nom Personnel";
+			label3->Text = "Prenom Personnel";
+			label4->Text = "Adresse mail Personnel";
+			lbl_Pers->Show();
+			TT_Pers->Show();
+			label5->Text = "Rue";
+			label6->Text = "Code Postal";
+			label7->Text = "Ville";
+			lbl_Pers->Text = "Date Embauche";
+			label8->Hide();
+			label9->Hide();
+			label10->Hide();
+			btn_egal->Hide();
+			this->TT_8->Hide();
+			this->TT_9->Hide();
+			this->TT_10->Hide();
+			this->groupBox1->Show();
+			this->groupBox1->Text = "Adresse";
+			this->groupBox2->Hide();
+			
 
 			this->loadData(this->index);
 		}

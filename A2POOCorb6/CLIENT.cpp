@@ -25,7 +25,7 @@ namespace NS_Composants
 	{
 		return "INSERT INTO CLIENT " +
 			"(NOM_CLIENT, PRENOM_CLIENT, DATE_NAISSANCE_CLIENT, DATE_PREMIERE_COMMANDE_CLIENT) " +
-			"VALUES('" + this->getNOM_CLIENT() + "', '" + this->getPRENOM_CLIENT() + "', '" + this->getDATE_NAISSANCE_CLIENT()+ "', '" + this ->getDATE_PREMIERE_COMMANDE_CLIENT() + "');SELECT @@IDENTITY;";
+			"VALUES('" + this->getNOM_CLIENT() + "', '" + this->getPRENOM_CLIENT() + "', '" + this->getDATE_NAISSANCE_CLIENT() + "', '" + this ->getDATE_PREMIERE_COMMANDE_CLIENT() + "');SELECT @@IDENTITY;";
 	}
 	String^ CLIENT::UPDATE(void)
 	{

@@ -42,12 +42,13 @@ namespace NS_Svc {
 		DataSet^ listePersonnel(String^);
 		DataSet^ listePersonnelAdresse(String^);
 		DataSet^ listeAdresse(String^);
-		DataSet^ listeCommande(String^); 
+		DataSet^ listeCommande(String^);
 		DataSet^ listeClientAdresse(String^);
 		DataSet^ listeReglement(String^);
 		DataSet^ listePaiement(String^);
 		DataSet^ listeCouleur(String^);
 		DataSet^ listeTarif(String^);
+		DataSet^ listeProduits(String^);
 		
 		
 		int ajouterClient(String^, String^, String^, String^, String^, int, String^, String^, int, String^);
@@ -56,7 +57,7 @@ namespace NS_Svc {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int ajouterPersonnel(String^, String^, String^, String^);
+		int ajouterPersonnel(int, String^, String^, String^, String^, String^, int, String^);
 		void modifierPersonnel(int, String^, String^, String^, String^);
 		void supprimerPersonnel(int);
 
@@ -65,6 +66,7 @@ namespace NS_Svc {
 		int ajouterAdresse(String^, int, String^);
 		void modifierAdresse(int, String^, int, String^);
 		void supprimerAdresse(int);
+		void supprimerAdresseClient(int);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -74,8 +76,8 @@ namespace NS_Svc {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int ajouterProduit(String^, String^, String^, String^, String^);
-		void modifierProduit(String^, String^, String^, String^, String^, String^);
+		void ajouterProduit(String^, int, int, double, String^, int, int, String^);
+		void modifierProduit(String^, int, int, double, String^, int, int, String^);
 		void supprimerProduit(String^);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
