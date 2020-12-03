@@ -28,6 +28,7 @@ namespace NS_Composants {
 		String^ INSERT_FAC_LIV(void);
 		String^ UPDATE(void);
 		String^ DELETE(void);
+		String^ DELETEAdresseClient(void);
 		void setRUE(String^);
 		void setCODE_POSTAL(int);
 		void setVILLE(String^);

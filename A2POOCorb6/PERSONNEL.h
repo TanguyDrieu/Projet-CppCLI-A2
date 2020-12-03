@@ -12,6 +12,7 @@ namespace NS_Composants {
 	private:
 		int ID_PERSONNEL;
 		int ID_ADRESSE;
+		int ID_SUPERIEUR;
 		String^ NOM_PERSONNEL;
 		String^ PRENOM_PERSONNEL;
 		String^ ADRESSE_MAIL_PERSONNEL;
@@ -28,7 +29,11 @@ namespace NS_Composants {
 		void setPRENOM_PERSONNEL(String^);
 		void setADRESSE_MAIL_PERSONNEL(String^);
 		void setDATE_EMBAUCHE(String^);
+		void setID_ADRESSE(int);
 		void setID_PERSONNEL(int);
+		void setID_SUP(int ID_SUP);
+		int getID_ADRESSE(void);
+		int getID_SUP(void);
 		String^ getNOM_PERSONNEL(void);
 		String^ getPRENOM_PERSONNEL(void);
 		String^ getADRESSE_MAIL_PERSONNEL(void);

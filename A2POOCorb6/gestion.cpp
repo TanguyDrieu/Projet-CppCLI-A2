@@ -16,6 +16,7 @@ namespace NS_Svc
 		this->personnel = gcnew NS_Composants::PERSONNEL();
 		this->commande = gcnew NS_Composants::COMMANDES();
 		this->tarif = gcnew NS_Composants::TARIF();
+		this->produit = gcnew NS_Composants::PRODUITS();
 		//this->reglement = gcnew NS_Composants::MODE_REGLEMENT();
 
 		this->ds = gcnew Data::DataSet();
@@ -86,6 +87,13 @@ namespace NS_Svc
 		return this->ds;
 	}
 
+	DataSet^ gestion::listeProduits(String^ dataTableName)
+	{
+		this->ds->Clear();
+		this->ds = this->cad->getRows(this->produit->SELECT(), dataTableName);
+		return this->ds;
+	}
+
 
 	int gestion::ajouterClient(String^ NOM_CLIENT, String^ PRENOM_CLIENT, String^ DATE_NAISSANCE_CLIENT, String^ DATE_PREMIERE_COMMANDE_CLIENT, String^ RUE_FAC, int CODE_POSTAL_FAC, String^ VILLE_FAC, String^ RUE_LIV, int CODE_POSTAL_LIV, String^ VILLE_LIV)
 	{
@@ -140,9 +148,17 @@ namespace NS_Svc
 
 
 
-	int gestion::ajouterPersonnel(String^ NOM_PERSONNEL, String^ PRENOM_PERSONNEL, String^ ADRESSE_MAIL_PERSONNEL, String^ DATE_EMBAUCHE)
+	int gestion::ajouterPersonnel(int ID_SUP, String^ NOM_PERSONNEL, String^ PRENOM_PERSONNEL, String^ ADRESSE_MAIL_PERSONNEL, String^ DATE_EMBAUCHE, String^ RUE, int CODE_POSTAL, String^ VILLE)
 	{
 		int id_personnel;
+		int id_adresse;
+		this->adresse->setRUE(RUE);
+		this->adresse->setCODE_POSTAL(CODE_POSTAL);
+		this->adresse->setVILLE(VILLE);
+		id_adresse = this->cad->actionRowsID(this->adresse->INSERT());
+
+		this->personnel->setID_ADRESSE(id_adresse);
+		this->personnel->setID_SUP(ID_SUP);
 		this->personnel->setNOM_PERSONNEL(NOM_PERSONNEL);
 		this->personnel->setPRENOM_PERSONNEL(PRENOM_PERSONNEL);
 		this->personnel->setADRESSE_MAIL_PERSONNEL(ADRESSE_MAIL_PERSONNEL);
@@ -190,6 +206,13 @@ namespace NS_Svc
 		this->adresse->setID_ADRESSE(ID_ADRESSE);
 		this->cad->actionRows(this->adresse->DELETE());
 	}
+	void gestion::supprimerAdresseClient(int ID_CLIENT)
+	{
+		this->adresse->setID_CLIENT_FAC(ID_CLIENT);
+		this->adresse->setID_CLIENT_LIV(ID_CLIENT);
+
+		this->cad->actionRows(this->adresse->DELETEAdresseClient());
+	}
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	int gestion::ajouterCommande(String^ DATE_LIVRAISON_PREVUE, String^ DATE_EMISSION_COMMANDE, String^ DATE_SOLDE_REGLEMENT, String^ MONTANT_HT, String^ MONTANT_TVA, String^ MONTANT_TTC, String^ DATE_EMISSION_FACTURE)
@@ -205,7 +228,7 @@ namespace NS_Svc
 		ref_commande = this->cad->actionRowsID(this->commande->INSERT());
 		return ref_commande;
 	}
-	void gestion::modifierCommande(int REF_COMMANDE, String^ DATE_LIVRAISON_PREVUE, String^ DATE_EMISSION_COMMANDE, String^ DATE_SOLDE_REGLEMENT, String^ MONTANT_HT, String^ MONTANT_TVA, String^ MONTANT_TTC, String^ DATE_EMISSION_FACTURE)
+	void gestion::modifierCommande(String^ REF_COMMANDE, String^ DATE_LIVRAISON_PREVUE, String^ DATE_EMISSION_COMMANDE, String^ DATE_SOLDE_REGLEMENT, String^ MONTANT_HT, String^ MONTANT_TVA, String^ MONTANT_TTC, String^ DATE_EMISSION_FACTURE)
 	{
 		this->commande->setREF_COMMANDE(REF_COMMANDE);
 		this->commande->setDATE_LIVRAISON_PREVUE(DATE_LIVRAISON_PREVUE);
@@ -217,25 +240,26 @@ namespace NS_Svc
 		this->commande->setDATE_EMISSION_FACTURE(DATE_EMISSION_FACTURE);
 		this->cad->actionRows(this->commande->UPDATE());
 	}
-	void gestion::supprimerCommande(int REF_COMMANDE)
+	void gestion::supprimerCommande(String^ REF_COMMANDE)
 	{
 		this->commande->setREF_COMMANDE(REF_COMMANDE);
 		this->cad->actionRows(this->commande->DELETE());
 	}
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	int gestion::ajouterProduit(String^ PRIX_HT, String^ DESIGNATION, String^ QUANTITE_STOCK, String^ SEUIL_REAPPROVISIONNEMENT, String^ TAUX_TVA)
+	void gestion::ajouterProduit(String^ REF_PRODUIT, int ID_NATURE, int ID_TARIF, double PRIX_HT, String^ DESIGNATION, int QUANTITE_STOCK, int SEUIL_REAPPROVISIONNEMENT, String^ TAUX_TVA)
 	{
-		int id_produit;
+		this->produit->setREF_PRODUIT(REF_PRODUIT);
+		this->produit->setID_NAT(ID_NATURE);
+		this->produit->setID_TARIF(ID_TARIF);
 		this->produit->setPRIX_HT(PRIX_HT);
 		this->produit->setDESIGNATION(DESIGNATION);
 		this->produit->setQUANTITE_STOCK(QUANTITE_STOCK);
 		this->produit->setSEUIL_REAPPROVISIONNEMENT(SEUIL_REAPPROVISIONNEMENT);
 		this->produit->setTAUX_TVA(TAUX_TVA);
-		id_produit = this->cad->actionRowsID(this->produit->INSERT());
-		return id_produit;
+		this->cad->actionRows(this->produit->INSERT());
 	}
-	void gestion::modifierProduit(String^ REF_PRODUIT, String^ PRIX_HT, String^ DESIGNATION, String^ QUANTITE_STOCK, String^ SEUIL_REAPPROVISIONNEMENT, String^ TAUX_TVA)
+	void gestion::modifierProduit(String^ REF_PRODUIT, int ID_NATURE, int ID_TARIF, double PRIX_HT, String^ DESIGNATION, int QUANTITE_STOCK, int SEUIL_REAPPROVISIONNEMENT, String^ TAUX_TVA)
 	{
 		this->produit->setREF_PRODUIT(REF_PRODUIT);
 		this->produit->setPRIX_HT(PRIX_HT);

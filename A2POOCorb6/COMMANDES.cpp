@@ -4,7 +4,7 @@ namespace NS_Composants
 {
 	COMMANDES::COMMANDES(void)
 	{
-		this->REF_COMMANDE = -1;
+		this->REF_COMMANDE = "RIEN";
 		this->DATE_LIVRAISON_PREVUE = "RIEN";
 		this->DATE_EMISSION_COMMANDE = "RIEN";
 		this->DATE_SOLDE_REGLEMENT = "RIEN";
@@ -36,9 +36,9 @@ namespace NS_Composants
 		return "DELETE FROM COMMANDES " +
 			"WHERE(REF_COMMANDE = " + this->getREF_COMMANDE() + ");";
 	}
-	void COMMANDES::setREF_COMMANDE(int REF_COMMANDE)
+	void COMMANDES::setREF_COMMANDE(String^ REF_COMMANDE)
 	{
-		if (REF_COMMANDE > 0)
+		if (REF_COMMANDE != "RIEN")
 		{
 			this->REF_COMMANDE = REF_COMMANDE;
 		}
@@ -92,7 +92,7 @@ namespace NS_Composants
 			this->DATE_EMISSION_FACTURE = DATE_EMISSION_FACTURE;
 		}
 	}
-	int COMMANDES::getREF_COMMANDE(void)
+	String^ COMMANDES::getREF_COMMANDE(void)
 	{
 		return this->REF_COMMANDE;
 	}

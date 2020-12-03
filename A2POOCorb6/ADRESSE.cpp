@@ -19,7 +19,7 @@ namespace NS_Composants
 	String^ ADRESSE::INSERT(void)
 	{
 		return "INSERT INTO ADRESSE " +
-			"(ID_CLIENT_FACTURATION, RUE, CODE_POSTAL, VILLE) " +
+			"(RUE, CODE_POSTAL, VILLE) " +
 			"VALUES('" + this->getRUE() + "', '" + this->getCODE_POSTAL() + "', '" + this->getVILLE() + "');SELECT @@IDENTITY;";
 	}
 	String^ ADRESSE::INSERT_FAC(void)
@@ -38,7 +38,7 @@ namespace NS_Composants
 	{
 		return "INSERT INTO ADRESSE " +
 			"(ID_CLIENT_FACTURATION, ID_CLIENT_LIVRAISON, RUE, CODE_POSTAL, VILLE) " +
-			"VALUES('" + this->getID_CLIENT_FAC() + "', '" + this->getID_CLIENT_LIV() + "','" + this->getRUE() + "', '" + this->getCODE_POSTAL() + "', '" + this->getVILLE() + "');SELECT @@IDENTITY;";
+			"VALUES('" + this->getID_CLIENT_FAC() + "', '" + this->getID_CLIENT_LIV() + "', '" + this->getRUE() + "', '" + this->getCODE_POSTAL() + "', '" + this->getVILLE() + "');SELECT @@IDENTITY;";
 	}
 	String^ ADRESSE::UPDATE(void)
 	{
@@ -52,6 +52,11 @@ namespace NS_Composants
 	{
 		return "DELETE FROM ADRESSE " +
 			"WHERE(ID_ADRESSE = " + this->getID_ADRESSE() + ");";
+	}
+	String^ ADRESSE::DELETEAdresseClient(void)
+	{
+		return "DELETE FROM ADRESSE " +
+			"WHERE(ID_CLIENT_FACTURATION = " + this->getID_CLIENT_FAC() + " OR ID_CLIENT_LIVRAISON = " + this->getID_CLIENT_LIV() + ");";
 	}
 	
 	void ADRESSE::setID_ADRESSE(int ID_ADRESSE)

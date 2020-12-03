@@ -10,7 +10,7 @@ namespace NS_Composants {
 	{
 
 	private:
-		int REF_COMMANDE;
+		String^ REF_COMMANDE;
 		String^ DATE_LIVRAISON_PREVUE;
 		String^ DATE_EMISSION_COMMANDE;
 		String^ DATE_SOLDE_REGLEMENT;
@@ -35,7 +35,7 @@ namespace NS_Composants {
 		void setMONTANT_TVA(String^);
 		void setMONTANT_TTC(String^);
 		void setDATE_EMISSION_FACTURE(String^);
-		void setREF_COMMANDE(int);
+		void setREF_COMMANDE(String^);
 
 
 		String^ getDATE_LIVRAISON_PREVUE(void);
@@ -46,7 +46,7 @@ namespace NS_Composants {
 		String^ getMONTANT_TTC(void);
 		String^ getDATE_EMISSION_FACTURE(void);
 		
-		int getREF_COMMANDE(void);
+		String^ getREF_COMMANDE(void);
 
 
 

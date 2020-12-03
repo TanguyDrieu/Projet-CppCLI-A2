@@ -3,21 +3,19 @@
 using namespace System;
 namespace NS_Composants {
 
-
-
-
 	ref class PRODUITS
 	{
 
 	private:
 		String^ REF_PRODUIT;
-		String^ PRIX_HT;
+		int ID_NATURE;
+		int ID_TARIF;
+		double PRIX_HT;
 		String^ DESIGNATION;
-		String^ QUANTITE_STOCK;
-		String^ SEUIL_REAPPROVISIONNEMENT;
+		int QUANTITE_STOCK;
+		int SEUIL_REAPPROVISIONNEMENT;
 		String^ TAUX_TVA;
 	
-
 	public:
 		PRODUITS();
 		String^ SELECT(void);
@@ -25,26 +23,22 @@ namespace NS_Composants {
 		String^ UPDATE(void);
 		String^ DELETE(void);
 		
-
-
-		void setPRIX_HT(String^);
+		void setID_NAT(int);
+		void setID_TARIF(int);
+		void setREF_PRODUIT(String^);
+		void setPRIX_HT(double);
 		void setDESIGNATION(String^);
-		void setQUANTITE_STOCK(String^);
-		void setSEUIL_REAPPROVISIONNEMENT(String^);
+		void setQUANTITE_STOCK(int);
+		void setSEUIL_REAPPROVISIONNEMENT(int);
 		void setTAUX_TVA(String^);
 		
-		void setREF_PRODUIT(String^);
-
-
-		String^ getPRIX_HT(void);
-		String^ getDESIGNATION(void);
-		String^ getQUANTITE_STOCK(void);
-		String^ getSEUIL_REAPPROVISIONNEMENT(void);
-		String^ getTAUX_TVA(void);
-	
+		int getID_NAT(void);
+		int getID_TARIF(void);
 		String^ getREF_PRODUIT(void);
-
-
-
+		double getPRIX_HT(void);
+		String^ getDESIGNATION(void);
+		int getQUANTITE_STOCK(void);
+		int getSEUIL_REAPPROVISIONNEMENT(void);
+		String^ getTAUX_TVA(void);
 	};
 }
