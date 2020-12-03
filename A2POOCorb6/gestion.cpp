@@ -94,17 +94,30 @@ namespace NS_Svc
 		this->client->setPRENOM_CLIENT(PRENOM_CLIENT);
 		this->client->setDATE_NAISSANCE_CLIENT(DATE_NAISSANCE_CLIENT);
 		this->client->setDATE_PREMIERE_COMMANDE_CLIENT(DATE_PREMIERE_COMMANDE_CLIENT);
-		this->adresse->setRUE(RUE_FAC);
-		this->adresse->setCODE_POSTAL(CODE_POSTAL_FAC);
-		this->adresse->setVILLE(VILLE_FAC);
-		this->adresse->setRUE(RUE_LIV);
-		this->adresse->setCODE_POSTAL(CODE_POSTAL_LIV);
-		this->adresse->setVILLE(VILLE_LIV);
 		id_personne = this->cad->actionRowsID(this->client->INSERT());
-		id_personne = this->cad->actionRowsID(this->adresse->INSERT());
-		this->adresse->setID_CLIENT_FAC(id_personne);
-		this->adresse->setID_CLIENT_LIV(id_personne);
-		
+
+		if (RUE_FAC != RUE_LIV || CODE_POSTAL_FAC != CODE_POSTAL_LIV || VILLE_FAC != VILLE_LIV) {
+			this->adresse->setID_CLIENT_FAC(id_personne);
+			this->adresse->setRUE(RUE_FAC);
+			this->adresse->setCODE_POSTAL(CODE_POSTAL_FAC);
+			this->adresse->setVILLE(VILLE_FAC);
+			this->cad->actionRowsID(this->adresse->INSERT_FAC());
+
+			this->adresse->setID_CLIENT_LIV(id_personne);
+			this->adresse->setRUE(RUE_LIV);
+			this->adresse->setCODE_POSTAL(CODE_POSTAL_LIV);
+			this->adresse->setVILLE(VILLE_LIV);
+			this->cad->actionRowsID(this->adresse->INSERT_LIV());
+		}
+		else {
+			this->adresse->setID_CLIENT_FAC(id_personne);
+			this->adresse->setID_CLIENT_LIV(id_personne);
+			this->adresse->setRUE(RUE_FAC);
+			this->adresse->setCODE_POSTAL(CODE_POSTAL_FAC);
+			this->adresse->setVILLE(VILLE_FAC);
+			this->cad->actionRowsID(this->adresse->INSERT_FAC_LIV());
+		}
+
 		return id_personne;
 	}
 	void gestion::modifierClient(int ID_CLIENT, String^ NOM_CLIENT, String^ PRENOM_CLIENT, String^ DATE_NAISSANCE_CLIENT, String^ DATE_PREMIERE_COMMANDE_CLIENT)

@@ -195,7 +195,7 @@ namespace A2POOCorb6 {
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(73, 13);
 			this->label2->TabIndex = 4;
-			this->label2->Text = L"Pr�nom Client";
+			this->label2->Text = L"Prénom Client";
 			// 
 			// TT_2
 			// 

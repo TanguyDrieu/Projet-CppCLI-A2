@@ -19,8 +19,26 @@ namespace NS_Composants
 	String^ ADRESSE::INSERT(void)
 	{
 		return "INSERT INTO ADRESSE " +
-			"(RUE, CODE_POSTAL, VILLE) " +
+			"(ID_CLIENT_FACTURATION, RUE, CODE_POSTAL, VILLE) " +
 			"VALUES('" + this->getRUE() + "', '" + this->getCODE_POSTAL() + "', '" + this->getVILLE() + "');SELECT @@IDENTITY;";
+	}
+	String^ ADRESSE::INSERT_FAC(void)
+	{
+		return "INSERT INTO ADRESSE " +
+			"(ID_CLIENT_FACTURATION, RUE, CODE_POSTAL, VILLE) " +
+			"VALUES('" + this->getID_CLIENT_FAC() + "', '" + this->getRUE() + "', '" + this->getCODE_POSTAL() + "', '" + this->getVILLE() + "');SELECT @@IDENTITY;";
+	}
+	String^ ADRESSE::INSERT_LIV(void)
+	{
+		return "INSERT INTO ADRESSE " +
+			"(ID_CLIENT_LIVRAISON, RUE, CODE_POSTAL, VILLE) " +
+			"VALUES('" + this->getID_CLIENT_LIV() + "','" + this->getRUE() + "', '" + this->getCODE_POSTAL() + "', '" + this->getVILLE() + "');SELECT @@IDENTITY;";
+	}
+	String^ ADRESSE::INSERT_FAC_LIV(void)
+	{
+		return "INSERT INTO ADRESSE " +
+			"(ID_CLIENT_FACTURATION, ID_CLIENT_LIVRAISON, RUE, CODE_POSTAL, VILLE) " +
+			"VALUES('" + this->getID_CLIENT_FAC() + "', '" + this->getID_CLIENT_LIV() + "','" + this->getRUE() + "', '" + this->getCODE_POSTAL() + "', '" + this->getVILLE() + "');SELECT @@IDENTITY;";
 	}
 	String^ ADRESSE::UPDATE(void)
 	{
@@ -81,11 +99,6 @@ namespace NS_Composants
 	}
 
 
-
-
-
-
-
 	int ADRESSE::getID_ADRESSE(void)
 	{
 	
@@ -93,6 +106,19 @@ namespace NS_Composants
 	
 	}
 
+	int ADRESSE::getID_CLIENT_FAC(void)
+	{
+
+		return this->ID_CLIENT_FAC;
+
+	}
+
+	int ADRESSE::getID_CLIENT_LIV(void)
+	{
+
+		return this->ID_CLIENT_LIV;
+
+	}
 
 	String^ ADRESSE::getRUE(void)
 	{
