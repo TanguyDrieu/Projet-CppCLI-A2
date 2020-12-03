@@ -5,7 +5,7 @@ namespace NS_Composants
 	PRODUITS::PRODUITS(void)
 	{
 
-		this->REF_PRODUIT = -1;
+		this->REF_PRODUIT = "Rien";
 		this->PRIX_HT = "RIEN";
 		this->DESIGNATION = "RIEN";
 		this->QUANTITE_STOCK = "RIEN";
@@ -42,13 +42,13 @@ namespace NS_Composants
 				"WHERE(REF_PRODUIT = " + this->getREF_PRODUIT() + ");";
 		}
 
-		void PRODUITS::setREF_PRODUIT(int REF_PRODUIT)
+	void PRODUITS::setREF_PRODUIT(String^ REF_PRODUIT)
+	{
+		if (REF_PRODUIT != "")
 		{
-			if (REF_PRODUIT > 0)
-			{
-				this->REF_PRODUIT = REF_PRODUIT;
-			}
+			this->REF_PRODUIT = REF_PRODUIT;
 		}
+	}
 
 		void PRODUITS::setPRIX_HT(String^ PRIX_HT)
 		{
@@ -87,12 +87,12 @@ namespace NS_Composants
 			}
 		}
 
-		int PRODUITS::getREF_PRODUIT(void)
-		{
+	String^ PRODUITS::getREF_PRODUIT(void)
+	{
 
-			return this->REF_PRODUIT;
+		return this->REF_PRODUIT;
 
-		}
+	}
 
 
 		String^ PRODUITS::getPRIX_HT(void)

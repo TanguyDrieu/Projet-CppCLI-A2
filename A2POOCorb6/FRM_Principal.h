@@ -24,7 +24,7 @@ namespace A2POOCorb6 {
 		}
 	protected:
 		/// <summary>
-		/// Nettoyage des ressources utilis�es.
+		/// Nettoyage des ressources utilisées.
 		/// </summary>
 		~FRM_Principal()
 		{
@@ -95,6 +95,7 @@ namespace A2POOCorb6 {
 	private: System::Windows::Forms::TextBox^ TT_8;
 	private: System::Windows::Forms::GroupBox^ groupBox2;
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
+	private: System::Windows::Forms::Button^ btn_egal;
 
 
 
@@ -150,6 +151,7 @@ namespace A2POOCorb6 {
 			this->TT_8 = (gcnew System::Windows::Forms::TextBox());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->btn_egal = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -193,7 +195,7 @@ namespace A2POOCorb6 {
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(73, 13);
 			this->label2->TabIndex = 4;
-			this->label2->Text = L"Pr�nom Client";
+			this->label2->Text = L"Prénom Client";
 			// 
 			// TT_2
 			// 
@@ -423,7 +425,7 @@ namespace A2POOCorb6 {
 			// label10
 			// 
 			this->label10->AutoSize = true;
-			this->label10->Location = System::Drawing::Point(501, 86);
+			this->label10->Location = System::Drawing::Point(536, 86);
 			this->label10->Name = L"label10";
 			this->label10->Size = System::Drawing::Size(26, 13);
 			this->label10->TabIndex = 37;
@@ -432,7 +434,7 @@ namespace A2POOCorb6 {
 			// label9
 			// 
 			this->label9->AutoSize = true;
-			this->label9->Location = System::Drawing::Point(409, 86);
+			this->label9->Location = System::Drawing::Point(444, 86);
 			this->label9->Name = L"label9";
 			this->label9->Size = System::Drawing::Size(64, 13);
 			this->label9->TabIndex = 36;
@@ -440,14 +442,14 @@ namespace A2POOCorb6 {
 			// 
 			// TT_10
 			// 
-			this->TT_10->Location = System::Drawing::Point(504, 105);
+			this->TT_10->Location = System::Drawing::Point(539, 105);
 			this->TT_10->Name = L"TT_10";
 			this->TT_10->Size = System::Drawing::Size(89, 20);
 			this->TT_10->TabIndex = 35;
 			// 
 			// TT_9
 			// 
-			this->TT_9->Location = System::Drawing::Point(409, 105);
+			this->TT_9->Location = System::Drawing::Point(444, 105);
 			this->TT_9->Name = L"TT_9";
 			this->TT_9->Size = System::Drawing::Size(89, 20);
 			this->TT_9->TabIndex = 34;
@@ -455,7 +457,7 @@ namespace A2POOCorb6 {
 			// label8
 			// 
 			this->label8->AutoSize = true;
-			this->label8->Location = System::Drawing::Point(311, 86);
+			this->label8->Location = System::Drawing::Point(346, 86);
 			this->label8->Name = L"label8";
 			this->label8->Size = System::Drawing::Size(27, 13);
 			this->label8->TabIndex = 33;
@@ -463,14 +465,14 @@ namespace A2POOCorb6 {
 			// 
 			// TT_8
 			// 
-			this->TT_8->Location = System::Drawing::Point(314, 105);
+			this->TT_8->Location = System::Drawing::Point(349, 105);
 			this->TT_8->Name = L"TT_8";
 			this->TT_8->Size = System::Drawing::Size(89, 20);
 			this->TT_8->TabIndex = 32;
 			// 
 			// groupBox2
 			// 
-			this->groupBox2->Location = System::Drawing::Point(307, 66);
+			this->groupBox2->Location = System::Drawing::Point(342, 66);
 			this->groupBox2->Name = L"groupBox2";
 			this->groupBox2->Size = System::Drawing::Size(296, 67);
 			this->groupBox2->TabIndex = 31;
@@ -485,11 +487,23 @@ namespace A2POOCorb6 {
 			this->dataGridView1->Size = System::Drawing::Size(945, 188);
 			this->dataGridView1->TabIndex = 38;
 			// 
+			// btn_egal
+			// 
+			this->btn_egal->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.25F));
+			this->btn_egal->Location = System::Drawing::Point(307, 97);
+			this->btn_egal->Name = L"btn_egal";
+			this->btn_egal->Size = System::Drawing::Size(29, 28);
+			this->btn_egal->TabIndex = 39;
+			this->btn_egal->Text = L"=";
+			this->btn_egal->UseVisualStyleBackColor = true;
+			this->btn_egal->Click += gcnew System::EventHandler(this, &FRM_Principal::btn_egal_Click);
+			// 
 			// FRM_Principal
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(968, 605);
+			this->Controls->Add(this->btn_egal);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->label10);
 			this->Controls->Add(this->label9);
@@ -689,17 +703,17 @@ namespace A2POOCorb6 {
 		}
 		this->index = 0;
 		this->loadData(this->index);
-		this->txt_message->Text += "Traitement termine.";
+		this->txt_message->Text += "Traitement terminé.";
 	}
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 	if(comboBox1->SelectedIndex == -1)
-		this->txt_message->Text = "Veuillez selectionner une table";
+		this->txt_message->Text = "Veuillez sélectionner une table";
 	else {
 		if (comboBox1->SelectedIndex == 0) {
 			this->tableSelect = "Client";
 			lbl_Id->Text = "ID Client";
 			label1->Text = "Nom Client";
-			label2->Text = "Prenom Client";
+			label2->Text = "Prénom Client";
 			label3->Text = "Date de naissance";
 			label4->Text = "Date premiere commande";
 			label5->Text = "Rue";
@@ -712,6 +726,7 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 			label8->Show();
 			label9->Show();
 			label10->Show();
+			btn_egal->Show();
 
 			this->loadData(this->index);
 		}
@@ -729,13 +744,20 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 			label9->Hide();
 			label10->Hide();
 			groupBox1->Text = "Adresse";
-			
+			btn_egal->Hide();
+
 			this->loadData(this->index);
 		}
 
 		this->txt_message->Text = "La table " + comboBox1->SelectedItem + " a ete selectionee";
 	}
 }
-
+private: System::Void btn_egal_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (this->mode == "nouv" || this->mode == "maj") {
+		this->TT_8->Text = this->TT_5->Text;
+		this->TT_9->Text = this->TT_6->Text;
+		this->TT_10->Text = this->TT_7->Text;
+	}
+}
 };
 }

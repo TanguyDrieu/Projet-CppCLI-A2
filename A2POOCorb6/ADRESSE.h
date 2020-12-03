@@ -23,6 +23,9 @@ namespace NS_Composants {
 		ADRESSE();
 		String^ SELECT(void);
 		String^ INSERT(void);
+		String^ INSERT_FAC(void);
+		String^ INSERT_LIV(void);
+		String^ INSERT_FAC_LIV(void);
 		String^ UPDATE(void);
 		String^ DELETE(void);
 		void setRUE(String^);
@@ -37,6 +40,8 @@ namespace NS_Composants {
 		String^ getVILLE(void);
 		
 		int getID_ADRESSE(void);
+		int getID_CLIENT_FAC();
+		int getID_CLIENT_LIV();
 
 
 

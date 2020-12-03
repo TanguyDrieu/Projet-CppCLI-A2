@@ -94,18 +94,30 @@ namespace NS_Svc
 		this->client->setPRENOM_CLIENT(PRENOM_CLIENT);
 		this->client->setDATE_NAISSANCE_CLIENT(DATE_NAISSANCE_CLIENT);
 		this->client->setDATE_PREMIERE_COMMANDE_CLIENT(DATE_PREMIERE_COMMANDE_CLIENT);
-		this->adresse->setRUE(RUE_FAC);
-		this->adresse->setCODE_POSTAL(CODE_POSTAL_FAC);
-		this->adresse->setVILLE(VILLE_FAC);
-		this->adresse->setRUE(RUE_LIV);
-		this->adresse->setCODE_POSTAL(CODE_POSTAL_LIV);
-		this->adresse->setVILLE(VILLE_LIV);
-		this->adresse->setID_CLIENT_FAC(id_personne);
-		this->adresse->setID_CLIENT_LIV(id_personne);
 		id_personne = this->cad->actionRowsID(this->client->INSERT());
-		id_personne = this->cad->actionRowsID(this->adresse->INSERT());
-		
-		
+
+		if (RUE_FAC != RUE_LIV || CODE_POSTAL_FAC != CODE_POSTAL_LIV || VILLE_FAC != VILLE_LIV) {
+			this->adresse->setID_CLIENT_FAC(id_personne);
+			this->adresse->setRUE(RUE_FAC);
+			this->adresse->setCODE_POSTAL(CODE_POSTAL_FAC);
+			this->adresse->setVILLE(VILLE_FAC);
+			this->cad->actionRowsID(this->adresse->INSERT_FAC());
+
+			this->adresse->setID_CLIENT_LIV(id_personne);
+			this->adresse->setRUE(RUE_LIV);
+			this->adresse->setCODE_POSTAL(CODE_POSTAL_LIV);
+			this->adresse->setVILLE(VILLE_LIV);
+			this->cad->actionRowsID(this->adresse->INSERT_LIV());
+		}
+		else {
+			this->adresse->setID_CLIENT_FAC(id_personne);
+			this->adresse->setID_CLIENT_LIV(id_personne);
+			this->adresse->setRUE(RUE_FAC);
+			this->adresse->setCODE_POSTAL(CODE_POSTAL_FAC);
+			this->adresse->setVILLE(VILLE_FAC);
+			this->cad->actionRowsID(this->adresse->INSERT_FAC_LIV());
+		}
+
 		return id_personne;
 	}
 	void gestion::modifierClient(int ID_CLIENT, String^ NOM_CLIENT, String^ PRENOM_CLIENT, String^ DATE_NAISSANCE_CLIENT, String^ DATE_PREMIERE_COMMANDE_CLIENT)
@@ -223,7 +235,7 @@ namespace NS_Svc
 		id_produit = this->cad->actionRowsID(this->produit->INSERT());
 		return id_produit;
 	}
-	void gestion::modifierProduit(int REF_PRODUIT, String^ PRIX_HT, String^ DESIGNATION, String^ QUANTITE_STOCK, String^ SEUIL_REAPPROVISIONNEMENT, String^ TAUX_TVA)
+	void gestion::modifierProduit(String^ REF_PRODUIT, String^ PRIX_HT, String^ DESIGNATION, String^ QUANTITE_STOCK, String^ SEUIL_REAPPROVISIONNEMENT, String^ TAUX_TVA)
 	{
 		this->produit->setREF_PRODUIT(REF_PRODUIT);
 		this->produit->setPRIX_HT(PRIX_HT);
@@ -233,7 +245,7 @@ namespace NS_Svc
 		this->produit->setTAUX_TVA(TAUX_TVA);
 		this->cad->actionRows(this->produit->UPDATE());
 	}
-	void gestion::supprimerProduit(int REF_PRODUIT)
+	void gestion::supprimerProduit(String^ REF_PRODUIT)
 	{
 		this->produit->setREF_PRODUIT(REF_PRODUIT);
 		this->cad->actionRows(this->produit->DELETE());

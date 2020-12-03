@@ -10,7 +10,7 @@ namespace NS_Composants {
 	{
 
 	private:
-		int REF_PRODUIT;
+		String^ REF_PRODUIT;
 		String^ PRIX_HT;
 		String^ DESIGNATION;
 		String^ QUANTITE_STOCK;
@@ -33,7 +33,7 @@ namespace NS_Composants {
 		void setSEUIL_REAPPROVISIONNEMENT(String^);
 		void setTAUX_TVA(String^);
 		
-		void setREF_PRODUIT(int);
+		void setREF_PRODUIT(String^);
 
 
 		String^ getPRIX_HT(void);
@@ -42,7 +42,7 @@ namespace NS_Composants {
 		String^ getSEUIL_REAPPROVISIONNEMENT(void);
 		String^ getTAUX_TVA(void);
 	
-		int getREF_PRODUIT(void);
+		String^ getREF_PRODUIT(void);
 
 
 
