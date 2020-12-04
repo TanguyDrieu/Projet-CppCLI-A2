@@ -10,7 +10,7 @@ namespace NS_Composants {
 		String^ REF_PRODUIT;
 		int ID_NATURE;
 		int ID_TARIF;
-		double PRIX_HT;
+		String^ PRIX_HT;
 		String^ DESIGNATION;
 		int QUANTITE_STOCK;
 		int SEUIL_REAPPROVISIONNEMENT;
@@ -19,6 +19,7 @@ namespace NS_Composants {
 	public:
 		PRODUITS();
 		String^ SELECT(void);
+		String^ SELECTProdNatTar(void);
 		String^ INSERT(void);
 		String^ UPDATE(void);
 		String^ DELETE(void);
@@ -26,7 +27,7 @@ namespace NS_Composants {
 		void setID_NAT(int);
 		void setID_TARIF(int);
 		void setREF_PRODUIT(String^);
-		void setPRIX_HT(double);
+		void setPRIX_HT(String^);
 		void setDESIGNATION(String^);
 		void setQUANTITE_STOCK(int);
 		void setSEUIL_REAPPROVISIONNEMENT(int);
@@ -35,7 +36,7 @@ namespace NS_Composants {
 		int getID_NAT(void);
 		int getID_TARIF(void);
 		String^ getREF_PRODUIT(void);
-		double getPRIX_HT(void);
+		String^ getPRIX_HT(void);
 		String^ getDESIGNATION(void);
 		int getQUANTITE_STOCK(void);
 		int getSEUIL_REAPPROVISIONNEMENT(void);

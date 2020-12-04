@@ -21,7 +21,7 @@ public:
 		//Data Source=LAPTOP-VK6ASJHC;Initial Catalog=TestKyrsach;Integrated Security=True
 		//Data Source=LAPTOP-VK6ASJHC;Initial Catalog=PROJET;Integrated Security=True
 		connStringBuilder = gcnew SqlConnectionStringBuilder();
-		connStringBuilder->DataSource = "VICTORIEN";
+		connStringBuilder->DataSource = "DESKTOP-PQR7KBN";
 		connStringBuilder->InitialCatalog = "PROJET_CASTORAMA";
 		connStringBuilder->IntegratedSecurity = true;
 		conn = gcnew SqlConnection(Convert::ToString(connStringBuilder));

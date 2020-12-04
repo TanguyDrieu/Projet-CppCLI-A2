@@ -18,8 +18,8 @@ namespace NS_Composants
 	String^ TARIF::INSERT(void)
 	{
 		return "INSERT INTO TARIF " +
-			"(INTITULE_TARIF) " +
-			"VALUES('" + this->getINTITULE_TARIF() + "');SELECT @@IDENTITY;";
+			"(ID_NATURE, REF_PRODUIT, PRIX_UNITAIRE, INTITULE_TARIF) " +
+			"VALUES('" + this->getID_NATURE() + "', '" + this->getREF_PRODUIT() + "', '" + this->getPRIX_UNITAIRE() + "', '" + this->getINTITULE_TARIF() + "');SELECT @@IDENTITY;";
 	}
 	String^ TARIF::UPDATE(void)
 	{
@@ -43,6 +43,26 @@ namespace NS_Composants
 		}
 	}
 
+	void TARIF::setID_COULEUR(int ID_COULEUR)
+	{
+		this->ID_COULEUR = ID_COULEUR;
+	}
+
+	void TARIF::setID_NATURE(int ID_NATURE)
+	{
+		this->ID_NATURE = ID_NATURE;
+	}
+
+	void TARIF::setREF_PRODUIT(String^ REF_PRODUIT)
+	{
+		this->REF_PRODUIT = REF_PRODUIT;
+	}
+
+	void TARIF::setPRIX_UNITAIRE(String^ PRIX_UNITAIRE)
+	{
+		this->PRIX_UNITAIRE = PRIX_UNITAIRE;
+	}
+
 	void TARIF::setINTITULE_TARIF(String^ INTITULE_TARIF)
 	{
 		if (INTITULE_TARIF != "")
@@ -57,6 +77,26 @@ namespace NS_Composants
 
 		return this->ID_TARIF;
 
+	}
+
+	int TARIF::getID_COULEUR(void)
+	{
+		return this->ID_COULEUR;
+	}
+
+	int TARIF::getID_NATURE(void)
+	{
+		return ID_NATURE;
+	}
+
+	String^ TARIF::getREF_PRODUIT(void)
+	{
+		return this->REF_PRODUIT;
+	}
+
+	String^ TARIF::getPRIX_UNITAIRE(void)
+	{
+		return this->PRIX_UNITAIRE;
 	}
 
 

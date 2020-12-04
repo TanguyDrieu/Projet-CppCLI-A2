@@ -8,7 +8,7 @@ namespace NS_Composants
 		this->REF_PRODUIT = "RIEN";
 		this->ID_NATURE = -1;
 		this->ID_TARIF = -1;
-		this->PRIX_HT = -1;
+		this->PRIX_HT = "RIEN";
 		this->DESIGNATION = "RIEN";
 		this->QUANTITE_STOCK = -1;
 		this->SEUIL_REAPPROVISIONNEMENT = -1;
@@ -20,6 +20,12 @@ namespace NS_Composants
 		{
 			return "SELECT REF_PRODUIT, ID_NATURE, ID_TARIF, PRIX_HT, DESIGNATION, QUANTITE_STOCK, SEUIL_REAPPROVISIONNEMENT, TAUX_TVA " +
 				"FROM PRODUITS;";
+		}
+		String^ PRODUITS::SELECTProdNatTar(void)
+		{
+			return "SELECT dbo.PRODUITS.REF_PRODUIT, PRIX_HT, DESIGNATION, QUANTITE_STOCK, SEUIL_REAPPROVISIONNEMENT, TAUX_TVA, dbo.PRODUITS.ID_NATURE, INTITULE_NATURE, dbo.PRODUITS.ID_TARIF, PRIX_UNITAIRE, INTITULE_TARIF " +
+				"FROM dbo.PRODUITS LEFT JOIN dbo.NATURE ON(dbo.PRODUITS.ID_NATURE = dbo.NATURE.ID_NATURE) " +
+				"LEFT JOIN dbo.TARIF ON(dbo.PRODUITS.ID_TARIF = dbo.TARIF.ID_TARIF)";
 		}
 		String^ PRODUITS::INSERT(void)
 		{
@@ -59,9 +65,9 @@ namespace NS_Composants
 		}
 	}
 
-		void PRODUITS::setPRIX_HT(double PRIX_HT)
+		void PRODUITS::setPRIX_HT(String^ PRIX_HT)
 		{
-			if (PRIX_HT != -1)
+			if (PRIX_HT != "RIEN")
 			{
 				this->PRIX_HT = PRIX_HT;
 			}
@@ -114,7 +120,7 @@ namespace NS_Composants
 	}
 
 
-		double PRODUITS::getPRIX_HT(void)
+		String^ PRODUITS::getPRIX_HT(void)
 		{
 			return this->PRIX_HT;
 		}

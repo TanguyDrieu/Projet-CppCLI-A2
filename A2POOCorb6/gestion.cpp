@@ -22,6 +22,7 @@ namespace NS_Svc
 		this->reglement = gcnew NS_Composants::MODE_REGLEMENTS();
 		this->contenir = gcnew NS_Composants::CONTENIR();
 		this->paiement = gcnew NS_Composants::PAIEMENT();
+		this->nature = gcnew NS_Composants::NATURE();
 
 		this->ds = gcnew Data::DataSet();
 	}
@@ -91,6 +92,13 @@ namespace NS_Svc
 	{
 		this->ds->Clear();
 		this->ds = this->cad->getRows(this->produit->SELECT(), dataTableName);
+		return this->ds;
+	}
+
+	DataSet^ gestion::listeProdNatTar(String^ dataTableName)
+	{
+		this->ds->Clear();
+		this->ds = this->cad->getRows(this->produit->SELECTProdNatTar(), dataTableName);
 		return this->ds;
 	}
 	
@@ -257,7 +265,7 @@ namespace NS_Svc
 	}
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	void gestion::ajouterProduit(String^ REF_PRODUIT, int ID_NATURE, int ID_TARIF, double PRIX_HT, String^ DESIGNATION, int QUANTITE_STOCK, int SEUIL_REAPPROVISIONNEMENT, String^ TAUX_TVA)
+	void gestion::ajouterProduit(String^ REF_PRODUIT, int ID_NATURE, int ID_TARIF, String^ PRIX_HT, String^ DESIGNATION, int QUANTITE_STOCK, int SEUIL_REAPPROVISIONNEMENT, String^ TAUX_TVA)
 	{
 		this->produit->setREF_PRODUIT(REF_PRODUIT);
 		this->produit->setID_NAT(ID_NATURE);
@@ -267,9 +275,31 @@ namespace NS_Svc
 		this->produit->setQUANTITE_STOCK(QUANTITE_STOCK);
 		this->produit->setSEUIL_REAPPROVISIONNEMENT(SEUIL_REAPPROVISIONNEMENT);
 		this->produit->setTAUX_TVA(TAUX_TVA);
-		this->cad->actionRows(this->produit->INSERT());
 	}
-	void gestion::modifierProduit(String^ REF_PRODUIT, int ID_NATURE, int ID_TARIF, double PRIX_HT, String^ DESIGNATION, int QUANTITE_STOCK, int SEUIL_REAPPROVISIONNEMENT, String^ TAUX_TVA)
+	void gestion::ajouterProdNatTar(String^ REF_PRODUIT, String^ PRIX_HT, String^ DESIGNATION, int QUANTITE_STOCK, int SEUIL_REAPPROVISIONNEMENT, String^ TAUX_TVA, int ID_NATURE, String^ INTITULE_NATURE, int ID_TARIF, String^ PRIX_UNITAIRE, String^ INTITULE_TARIF)
+	{
+		this->produit->setREF_PRODUIT(REF_PRODUIT);
+		this->produit->setPRIX_HT(PRIX_HT);
+		this->produit->setDESIGNATION(DESIGNATION);
+		this->produit->setQUANTITE_STOCK(QUANTITE_STOCK);
+		this->produit->setSEUIL_REAPPROVISIONNEMENT(SEUIL_REAPPROVISIONNEMENT);
+		this->produit->setTAUX_TVA(TAUX_TVA);
+		this->produit->setID_NAT(ID_NATURE);
+		this->produit->setID_TARIF(ID_TARIF);
+		this->cad->actionRows(this->produit->INSERT());
+
+		this->nature->setID_NATURE(ID_NATURE);
+		this->nature->setINTITULE_NATURE(INTITULE_NATURE);
+		this->cad->actionRows(this->nature->INSERT());
+
+		this->tarif->setID_TARIF(ID_TARIF);
+		this->tarif->setID_NATURE(ID_NATURE);
+		this->tarif->setREF_PRODUIT(REF_PRODUIT);
+		this->tarif->setPRIX_UNITAIRE(PRIX_UNITAIRE);
+		this->tarif->setINTITULE_TARIF(INTITULE_TARIF);
+		this->cad->actionRows(this->tarif->INSERT());
+	}
+	void gestion::modifierProduit(String^ REF_PRODUIT, int ID_NATURE, int ID_TARIF, String^ PRIX_HT, String^ DESIGNATION, int QUANTITE_STOCK, int SEUIL_REAPPROVISIONNEMENT, String^ TAUX_TVA)
 	{
 		this->produit->setREF_PRODUIT(REF_PRODUIT);
 		this->produit->setPRIX_HT(PRIX_HT);

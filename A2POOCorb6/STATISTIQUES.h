@@ -471,7 +471,7 @@ namespace A2POOCorb6 {
 		FUNCTIONSTATS pssr;
 		SqlConnectionStringBuilder^ connStringBuilder;
 		connStringBuilder = gcnew SqlConnectionStringBuilder();
-		connStringBuilder->DataSource = "VICTORIEN";
+		connStringBuilder->DataSource = "DESKTOP-PQR7KBN";
 		connStringBuilder->InitialCatalog = "PROJET_CASTORAMA";
 		connStringBuilder->IntegratedSecurity = true;
 		SqlConnection^ conn = gcnew SqlConnection(Convert::ToString(connStringBuilder));
@@ -504,7 +504,7 @@ namespace A2POOCorb6 {
 		FUNCTIONSTATS apv;
 		SqlConnectionStringBuilder^ connStringBuilder;
 		connStringBuilder = gcnew SqlConnectionStringBuilder();
-		connStringBuilder->DataSource = "VICTORIEN";
+		connStringBuilder->DataSource = "DESKTOP-PQR7KBN";
 		connStringBuilder->InitialCatalog = "PROJET_CASTORAMA";
 		connStringBuilder->IntegratedSecurity = true;
 		SqlConnection^ conn = gcnew SqlConnection(Convert::ToString(connStringBuilder));
@@ -537,7 +537,7 @@ namespace A2POOCorb6 {
 		FUNCTIONSTATS amv;
 		SqlConnectionStringBuilder^ connStringBuilder;
 		connStringBuilder = gcnew SqlConnectionStringBuilder();
-		connStringBuilder->DataSource = "VICTORIEN";
+		connStringBuilder->DataSource = "DESKTOP-PQR7KBN";
 		connStringBuilder->InitialCatalog = "PROJET_CASTORAMA";
 		connStringBuilder->IntegratedSecurity = true;
 		SqlConnection^ conn = gcnew SqlConnection(Convert::ToString(connStringBuilder));
