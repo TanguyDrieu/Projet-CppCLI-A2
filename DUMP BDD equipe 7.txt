@@ -1,0 +1,222 @@
+/*==============================================================*/
+/* Table : ADRESSE                                              */
+/*==============================================================*/
+create table ADRESSE (
+   ID_ADRESSE           numeric              identity,
+   ID_CLIENT_FACTURATION int                  null,
+   ID_CLIENT_LIVRAISON  int                  null,
+   RUE                  varchar(40)          null,
+   CODE_POSTAL          varchar(5)           null,
+   VILLE                char(40)             null,
+   constraint PK_ADRESSE primary key nonclustered (ID_ADRESSE)
+)
+go
+
+/*==============================================================*/
+/* Table : CLIENT                                               */
+/*==============================================================*/
+create table CLIENT (
+   ID_CLIENT            numeric              identity,
+   NOM_CLIENT           char(40)             null,
+   PRENOM_CLIENT        char(40)             null,
+   DATE_NAISSANCE_CLIENT date                 null,
+   DATE_PREMIERE_COMMANDE_CLIENT date                 null,
+   constraint PK_CLIENT primary key nonclustered (ID_CLIENT)
+)
+go
+
+/*==============================================================*/
+/* Table : COMMANDES                                            */
+/*==============================================================*/
+create table COMMANDES (
+   REF_COMMANDE         varchar(40)          not null,
+   ID_CLIENT            int                  null,
+   DATE_LIVRAISON_PREVUE date                 null,
+   DATE_EMISSION_COMMANDE date                 null,
+   DATE_SOLDE_REGLEMENT date                 null,
+   MONTANT_HT           money                null,
+   MONTANT_TVA          money                null,
+   MONTANT_TTC          money                null,
+   DATE_EMISSION_FACTURE date                 null,
+   constraint PK_COMMANDES primary key nonclustered (REF_COMMANDE)
+)
+go
+
+/*==============================================================*/
+/* Table : CONTENIR                                             */
+/*==============================================================*/
+create table CONTENIR (
+   REF_COMMANDE         varchar(40)          not null,
+   REF_PRODUIT          varchar(40)          not null,
+   QUANTITE_ARTICLE     int                  null,
+   constraint PK_CONTENIR primary key nonclustered (REF_COMMANDE, REF_PRODUIT)
+)
+go
+
+/*==============================================================*/
+/* Table : COULEUR                                              */
+/*==============================================================*/
+create table COULEUR (
+   ID_COULEUR           numeric              identity,
+   ID_TARIF             numeric              null,
+   NOM_COULEUR          char(40)             null,
+   constraint PK_COULEUR primary key nonclustered (ID_COULEUR)
+)
+go
+
+/*==============================================================*/
+/* Table : MODE_REGLEMENT                                       */
+/*==============================================================*/
+create table MODE_REGLEMENT (
+   ID_MODE              numeric              identity,
+   MODE_REGLEMENT       char(40)             null,
+   constraint PK_MODE_REGLEMENT primary key nonclustered (ID_MODE)
+)
+go
+
+/*==============================================================*/
+/* Table : NATURE                                               */
+/*==============================================================*/
+create table NATURE (
+   ID_NATURE            numeric              identity,
+   INTITULE_NATURE      char(40)             null,
+   constraint PK_NATURE primary key nonclustered (ID_NATURE)
+)
+go
+
+/*==============================================================*/
+/* Table : PAIEMENT                                             */
+/*==============================================================*/
+create table PAIEMENT (
+   ID_PAIEMENT          numeric              identity,
+   ID_MODE              int                  null,
+   REF_COMMANDE         varchar(40)          null,
+   DATE_PAIEMENT        date                 null,
+   MONTANT_PAIEMENT     money                null,
+   constraint PK_PAIEMENT primary key nonclustered (ID_PAIEMENT)
+)
+go
+
+/*==============================================================*/
+/* Table : PERSONNEL                                            */
+/*==============================================================*/
+create table PERSONNEL (
+   ID_PERSONNEL         numeric              identity,
+   ID_ADRESSE           int                  null,
+   ID_SUPERIEUR         int                  null,
+   NOM_PERSONNEL        char(40)             null,
+   PRENOM_PERSONNEL     char(40)             null,
+   ADRESSE_MAIL_PERSONNEL varchar(50)          null,
+   DATE_EMBAUCHE        date                 null,
+   constraint PK_PERSONNEL primary key nonclustered (ID_PERSONNEL)
+)
+go
+
+/*==============================================================*/
+/* Table : PRODUITS                                             */
+/*==============================================================*/
+create table PRODUITS (
+   REF_PRODUIT          varchar(40)          not null,
+   ID_NATURE            numeric                  null,
+   ID_TARIF             numeric              null,
+   PRIX_HT              money                null,
+   DESIGNATION          char(40)             null,
+   QUANTITE_STOCK       int                  null,
+   SEUIL_REAPPROVISIONNEMENT int                  null,
+   TAUX_TVA             decimal(4,3)         null,
+   constraint PK_PRODUITS primary key nonclustered (REF_PRODUIT)
+)
+go
+
+/*==============================================================*/
+/* Table : TARIF                                                */
+/*==============================================================*/
+create table TARIF (
+   ID_TARIF             numeric              identity,
+   ID_COULEUR           numeric              null,
+   ID_NATURE            int                  null,
+   REF_PRODUIT          varchar(40)          null,
+   PRIX_UNITAIRE        money                null,
+   INTITULE_TARIF       char(40)             null,
+   constraint PK_TARIF primary key nonclustered (ID_TARIF)
+)
+go
+
+INSERT INTO CLIENT (NOM_CLIENT, PRENOM_CLIENT, DATE_NAISSANCE_CLIENT, DATE_PREMIERE_COMMANDE_CLIENT)
+VALUES
+('Drieu', 'Tanguy', '16.07.2001', '10.03.2010'),
+('Leroy', 'Nathan', '22.09.2001', '27.11.2012'),
+('Goudeau', 'Victorien', '16.02.2001', '03.01.2009');
+
+INSERT INTO ADRESSE(ID_CLIENT_FACTURATION, ID_CLIENT_LIVRAISON, RUE, CODE_POSTAL, VILLE)
+VALUES
+(1, 1, 'Des marais', '76400', 'Le Houlme'),
+(2, 2, 'Fontaine', '76600', 'Dieppe'),
+(3, 3, 'Sources', '76890', 'Rouen'),
+(NULL, NULL, 'Front', '76000', 'Rouen'),
+(NULL, NULL, 'Tubes', '76000', 'Rouen'),
+(NULL, NULL, 'Navire', '76000', 'Rouen');
+
+
+INSERT INTO PERSONNEL(ID_ADRESSE, ID_SUPERIEUR, NOM_PERSONNEL, PRENOM_PERSONNEL, ADRESSE_MAIL_PERSONNEL, DATE_EMBAUCHE)
+VALUES
+(4, NULL, 'Gerald', 'Gabriel', 'cesi', '3.12.1969'),
+(5, 1, 'Luart', 'Valérie', 'cesi', '12.02.1982'),
+(6, 1,'Durtout', 'Jean-Francois', 'cesi', '21.04.1977');
+
+
+INSERT INTO COMMANDES  (REF_COMMANDE,ID_CLIENT, DATE_LIVRAISON_PREVUE, DATE_EMISSION_COMMANDE, DATE_SOLDE_REGLEMENT, MONTANT_HT, MONTANT_TVA, MONTANT_TTC, DATE_EMISSION_FACTURE)
+VALUES
+('TADR2020LEH1', 1, '03.12.20', '02.12.20', '02.12.20', '120', '30', '10', '02.12.20'),
+('VIGO2020ROU2',2, '16.05.2013', '15.05.2013', '15.05.2013', '120', '20', '90', '15.05.2013'),
+('NALE2020DIE3',3, '28.10.2014', '28.10.2014', '28.10.2014', '70', '30', '60', '28.10.2014');
+
+
+INSERT INTO PRODUITS (REF_PRODUIT, ID_NATURE, ID_TARIF, PRIX_HT, DESIGNATION, QUANTITE_STOCK, SEUIL_REAPPROVISIONNEMENT, TAUX_TVA)
+VALUES
+('TABLEAU', 1, 1, 85, 'Decoration', 3, 2, 1),
+('CUISINE', 2, 2, 75, 'Utile', '5', 4, 1),
+('TELEVISION', 3, 3, 65, 'Electro', 6, 7, 1);
+
+
+INSERT INTO TARIF (ID_COULEUR, ID_NATURE, REF_PRODUIT, PRIX_UNITAIRE, INTITULE_TARIF)
+VALUES
+(1, 1, 'tab20', '120', 'tab'),
+(2, 2, 'cui30', '200', 'cui'),
+(3, 3, 'tel40', '100', 'tel');
+
+INSERT INTO PAIEMENT (ID_MODE, REF_COMMANDE, DATE_PAIEMENT, MONTANT_PAIEMENT)
+VALUES
+(1, 'TADR2020LEH1', '3.12.20', '120'),
+(2, 'VIGO2020ROU2', '2.12.20', '200'),
+(2, 'NALE2020DIE3', '4.12.20', '100');
+
+INSERT INTO NATURE (INTITULE_NATURE)
+VALUES
+('tableau'),
+('cuisine'),
+('television');
+
+INSERT INTO MODE_REGLEMENT (MODE_REGLEMENT)
+VALUES
+('carte'),
+('cheque'),
+('espece');
+
+INSERT INTO COULEUR (ID_TARIF, NOM_COULEUR)
+VALUES
+(1,'rouge'),
+(2,'violet'),
+(3,'orange');
+
+INSERT INTO CONTENIR (REF_COMMANDE, REF_PRODUIT, QUANTITE_ARTICLE)
+VALUES
+('TADR2020LEH1', 'ta', 10),
+('VIGO2020ROU2', 'cui', 8),
+('NALE2020DIE3', 'tel', 7);
+
+
+
+
+
+go
