@@ -7,3 +7,5 @@ pour ajouter, modifier, supprimer des données et faire des statistiques selon l
 
 L'entièretée de l'application est contenue dans le dossier \A2POOCorb6\A2POOCorb6 , son fonctionnement nécessite un léger paramétrage des chemins d'accès au PC et une BDD
 déjà existante sur SQL Server.
+
+Des images de l'application peuvent être trouvées sous l'onglet "Issues".
