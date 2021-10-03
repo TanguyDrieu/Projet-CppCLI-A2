@@ -1,6 +1,6 @@
 # A2POOCorb6
 
-Voici le projet Programmation Orientéé Objet en C++. Notre équipe est composée de : Victorien Goudeau, Tanguy Drieu et Nathan Leroy.
+Voici le projet Programmation Orientéé Objet en C++ qui s'est déroulé sur la période novembre-décembre 2020. Notre équipe est composée de : Victorien Goudeau, Tanguy Drieu et Nathan Leroy.
 
 L'objectif de ce projet était de créer une application graphique sous C++/CLI permettant d'accéder à une base de donnée dans Microsoft SQL Server 
 pour ajouter, modifier, supprimer des données et faire des statistiques selon les données contenues (ex : chiffre d'affaire d'un mois).
